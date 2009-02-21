@@ -1,0 +1,3929 @@
+Script started on Wed 11 Feb 2009 07:24:54 PM MST
+[?1034h[msiegris@rainbow src]$cs[Kvs diff -c kern/main.[K/main.c
+Index: kern/main/main.c
+===================================================================
+RCS file: /u/msiegris/cs161/cvsroot/src/kern/main/main.c,v
+retrieving revision 1.1.1.1
+diff -c -r1.1.1.1 main.c
+*** kern/main/main.c	12 Feb 2009 01:40:04 -0000	1.1.1.1
+--- kern/main/main.c	12 Feb 2009 02:24:02 -0000
+***************
+*** 1,3 ****
+--- 1,5 ----
++ // Michael Siegrist, Justin Kenworthy, Bradley Brown
++ 
+  /*
+   * Main.
+   */
+***************
+*** 70,75 ****
+--- 72,81 ----
+  		GROUP_VERSION, buildconfig, buildversion);
+  	kprintf("\n");
+  
++ 	/////////////////// ADDED //////////////////////
++ 	hello();
++ 	////////////////////////////////////////////////
++ 
+  	ram_bootstrap();
+  	scheduler_bootstrap();
+  	thread_bootstrap();
+[msiegris@rainbow src]$cvs commit
+cvs commit: Examining .
+cvs commit: Examining bin
+cvs commit: Examining bin/cat
+cvs commit: Examining bin/cp
+cvs commit: Examining bin/false
+cvs commit: Examining bin/ln
+cvs commit: Examining bin/ls
+cvs commit: Examining bin/mkdir
+cvs commit: Examining bin/mv
+cvs commit: Examining bin/pwd
+cvs commit: Examining bin/rm
+cvs commit: Examining bin/rmdir
+cvs commit: Examining bin/sh
+cvs commit: Examining bin/sync
+cvs commit: Examining bin/true
+cvs commit: Examining include
+cvs commit: Examining include/sys
+cvs commit: Examining kern
+cvs commit: Examining kern/arch
+cvs commit: Examining kern/arch/mips
+cvs commit: Examining kern/arch/mips/conf
+cvs commit: Examining kern/arch/mips/include
+cvs commit: Examining kern/arch/mips/mips
+cvs commit: Examining kern/asst1
+cvs commit: Examining kern/compile
+cvs commit: Examining kern/conf
+cvs commit: Examining kern/dev
+cvs commit: Examining kern/dev/generic
+cvs commit: Examining kern/dev/lamebus
+cvs commit: Examining kern/fs
+cvs commit: Examining kern/fs/sfs
+cvs commit: Examining kern/fs/vfs
+cvs commit: Examining kern/include
+cvs commit: Examining kern/include/kern
+cvs commit: Examining kern/lib
+cvs commit: Examining kern/main
+cvs commit: Examining kern/test
+cvs commit: Examining kern/thread
+cvs commit: Examining kern/userprog
+cvs commit: Examining kern/vm
+cvs commit: Examining lib
+cvs commit: Examining lib/crt0
+cvs commit: Examining lib/hostcompat
+cvs commit: Examining lib/libc
+cvs commit: Examining man
+cvs commit: Examining man/bin
+cvs commit: Examining man/dev
+cvs commit: Examining man/libc
+cvs commit: Examining man/misc
+cvs commit: Examining man/sbin
+cvs commit: Examining man/syscall
+cvs commit: Examining man/testbin
+cvs commit: Examining man/toplevel
+cvs commit: Examining mk
+cvs commit: Examining sbin
+cvs commit: Examining sbin/dumpsfs
+cvs commit: Examining sbin/halt
+cvs commit: Examining sbin/mksfs
+cvs commit: Examining sbin/poweroff
+cvs commit: Examining sbin/reboot
+cvs commit: Examining testbin
+cvs commit: Examining testbin/add
+cvs commit: Examining testbin/argtest
+cvs commit: Examining testbin/badcall
+cvs commit: Examining testbin/bigfile
+cvs commit: Examining testbin/conman
+cvs commit: Examining testbin/crash
+cvs commit: Examining testbin/ctest
+cvs commit: Examining testbin/dirconc
+cvs commit: Examining testbin/dirseek
+cvs commit: Examining testbin/dirtest
+cvs commit: Examining testbin/f_test
+cvs commit: Examining testbin/farm
+cvs commit: Examining testbin/faulter
+cvs commit: Examining testbin/filetest
+cvs commit: Examining testbin/forkbomb
+cvs commit: Examining testbin/forktest
+cvs commit: Examining testbin/guzzle
+cvs commit: Examining testbin/hash
+cvs commit: Examining testbin/hog
+cvs commit: Examining testbin/huge
+cvs commit: Examining testbin/kitchen
+cvs commit: Examining testbin/malloctest
+cvs commit: Examining testbin/matmult
+cvs commit: Examining testbin/palin
+cvs commit: Examining testbin/parallelvm
+cvs commit: Examining testbin/randcall
+cvs commit: Examining testbin/rmdirtest
+cvs commit: Examining testbin/rmtest
+cvs commit: Examining testbin/sink
+cvs commit: Examining testbin/sort
+cvs commit: Examining testbin/sty
+cvs commit: Examining testbin/tail
+cvs commit: Examining testbin/tictac
+cvs commit: Examining testbin/triplehuge
+cvs commit: Examining testbin/triplemat
+cvs commit: Examining testbin/triplesort
+cvs commit: Examining testbin/userthreads
+[?1049h[?1h=[1;24r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[24;1H"/tmp/cvsnw20b4" "/tmp/cvsnw20b4" 9L, 301C[2;1HCVS: ----------------------------------------------------------------------
+CVS: Enter Log.  Lines beginning with `CVS:' are removed automatically
+CVS:
+CVS: Committing in bin/cat
+CVS:
+CVS: Modified Files:
+CVS:    depend.mk
+CVS: ----------------------------------------------------------------------
+[1m[34m~                                                                               [11;1H~                                                                               [12;1H~                                                                               [13;1H~                                                                               [14;1H~                                                                               [15;1H~                                                                               [16;1H~                                                                               [17;1H~                                                                               [18;1H~                                                                               [19;1H~                                                                               [20;1H~                                                                               [21;1H~                                                                               [22;1H~                                                                               [23;1H~                                                                               [1;1H[?12l[?25h[?25l[m[24;1H[K[24;1H:[?12l[?25hq[?25l[24;1H[K[24;1H[?1l>[?12l[?25h[?1049l
+Log message unchanged or not specified
+a)bort, c)ontinue, e)dit, !)reuse this message unchanged for remaining dirs
+Action: (continue) c
+Checking in bin/cat/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/cat/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+[?1049h[?1h=[1;24r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[24;1H"/tmp/cvsQ8N0pN" "/tmp/cvsQ8N0pN" 9L, 300C[2;1HCVS: ----------------------------------------------------------------------
+CVS: Enter Log.  Lines beginning with `CVS:' are removed automatically
+CVS:
+CVS: Committing in bin/cp
+CVS:
+CVS: Modified Files:
+CVS:    depend.mk
+CVS: ----------------------------------------------------------------------
+[1m[34m~                                                                               [11;1H~                                                                               [12;1H~                                                                               [13;1H~                                                                               [14;1H~                                                                               [15;1H~                                                                               [16;1H~                                                                               [17;1H~                                                                               [18;1H~                                                                               [19;1H~                                                                               [20;1H~                                                                               [21;1H~                                                                               [22;1H~                                                                               [23;1H~                                                                               [1;1H[?12l[?25h[?25l[m[24;1H[1m-- INSERT --[m[24;13H[K[1;1H[?12l[?25h[?25l1[?12l[?25h[24;1H[K[1;1H[?25l[?12l[?25h[?25l[24;1H:[?12l[?25hwq[?25l"/tmp/cvsQ8N0pN" "/tmp/cvsQ8N0pN" 9L, 301C written
+[?1l>[?12l[?25h[?1049lChecking in bin/cp/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/cp/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+[?1049h[?1h=[1;24r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[24;1H"/tmp/cvsVOj7b0" "/tmp/cvsVOj7b0" 9L, 304C[1;1H1
+CVS: ----------------------------------------------------------------------
+CVS: Enter Log.  Lines beginning with `CVS:' are removed automatically
+CVS:
+CVS: Committing in bin/false
+CVS:
+CVS: Modified Files:
+CVS:    depend.mk
+CVS: ----------------------------------------------------------------------
+[1m[34m~                                                                               [11;1H~                                                                               [12;1H~                                                                               [13;1H~                                                                               [14;1H~                                                                               [15;1H~                                                                               [16;1H~                                                                               [17;1H~                                                                               [18;1H~                                                                               [19;1H~                                                                               [20;1H~                                                                               [21;1H~                                                                               [22;1H~                                                                               [23;1H~                                                                               [1;1H[?12l[?25h[?25l[m[1;1H[K[1;1H[?12l[?25h[?25l[24;1H[1m-- INSERT --[m[24;13H[K[1;1H[?12l[?25h
+
+
+CVS: [5;6H[6;6H[?25l S[?12l[?25h[?25lSo[?12l[?25h[?25lom[?12l[?25h[?25lme[?12l[?25h[?25l [?12l[?25h[?25l[?12l[?25h[?25l[6;9H[K[6;9H[?12l[?25h[?25l[6;8H[K[6;8H[?12l[?25h[?25l[6;7H[K[6;7H[?12l[?25h[?25l[6;6H[K[6;6H[?12l[?25h[?25l [?12l[?25h[24;1H[K[6;6H[?25l[?12l[?25h[?25l[24;1H:[?12l[?25hwq[?25l"/tmp/cvsVOj7b0" "/tmp/cvsVOj7b0" 9L, 304C written
+[?1l>[?12l[?25h[?1049l
+Log message unchanged or not specified
+a)bort, c)ontinue, e)dit, !)reuse this message unchanged for remaining dirs
+Action: (continue) !
+Checking in bin/false/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/false/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in bin/ln/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/ln/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in bin/ls/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/ls/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in bin/mkdir/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/mkdir/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in bin/mv/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/mv/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in bin/pwd/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/pwd/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in bin/rm/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/rm/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in bin/rmdir/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/rmdir/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in bin/sh/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/sh/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in bin/sh/dependh.mk;
+/u/msiegris/cs161/cvsroot/src/bin/sh/dependh.mk,v  <--  dependh.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in bin/sync/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/sync/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in bin/true/depend.mk;
+/u/msiegris/cs161/cvsroot/src/bin/true/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in kern/conf/conf.kern;
+/u/msiegris/cs161/cvsroot/src/kern/conf/conf.kern,v  <--  conf.kern
+new revision: 1.2; previous revision: 1.1
+done
+RCS file: /u/msiegris/cs161/cvsroot/src/kern/main/hello.c,v
+done
+Checking in kern/main/hello.c;
+/u/msiegris/cs161/cvsroot/src/kern/main/hello.c,v  <--  hello.c
+initial revision: 1.1
+done
+Checking in kern/main/main.c;
+/u/msiegris/cs161/cvsroot/src/kern/main/main.c,v  <--  main.c
+new revision: 1.2; previous revision: 1.1
+done
+Checking in lib/hostcompat/dependh.mk;
+/u/msiegris/cs161/cvsroot/src/lib/hostcompat/dependh.mk,v  <--  dependh.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in lib/libc/depend.mk;
+/u/msiegris/cs161/cvsroot/src/lib/libc/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in sbin/dumpsfs/depend.mk;
+/u/msiegris/cs161/cvsroot/src/sbin/dumpsfs/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in sbin/dumpsfs/dependh.mk;
+/u/msiegris/cs161/cvsroot/src/sbin/dumpsfs/dependh.mk,v  <--  dependh.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in sbin/halt/depend.mk;
+/u/msiegris/cs161/cvsroot/src/sbin/halt/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in sbin/mksfs/depend.mk;
+/u/msiegris/cs161/cvsroot/src/sbin/mksfs/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in sbin/mksfs/dependh.mk;
+/u/msiegris/cs161/cvsroot/src/sbin/mksfs/dependh.mk,v  <--  dependh.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in sbin/poweroff/depend.mk;
+/u/msiegris/cs161/cvsroot/src/sbin/poweroff/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in sbin/reboot/depend.mk;
+/u/msiegris/cs161/cvsroot/src/sbin/reboot/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/add/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/add/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/argtest/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/argtest/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/badcall/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/badcall/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/bigfile/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/bigfile/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/conman/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/conman/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/crash/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/crash/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/ctest/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/ctest/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/dirconc/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/dirconc/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/dirseek/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/dirseek/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/dirtest/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/dirtest/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/f_test/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/f_test/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/farm/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/farm/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/faulter/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/faulter/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/filetest/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/filetest/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/forkbomb/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/forkbomb/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/forktest/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/forktest/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/guzzle/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/guzzle/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/hash/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/hash/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/hash/dependh.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/hash/dependh.mk,v  <--  dependh.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/hog/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/hog/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/huge/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/huge/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/kitchen/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/kitchen/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/matmult/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/matmult/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/palin/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/palin/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/parallelvm/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/parallelvm/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/randcall/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/randcall/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/rmdirtest/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/rmdirtest/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/rmtest/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/rmtest/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/sink/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/sink/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/sort/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/sort/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/sty/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/sty/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/tail/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/tail/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/tictac/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/tictac/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/triplehuge/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/triplehuge/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/triplemat/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/triplemat/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+Checking in testbin/triplesort/depend.mk;
+/u/msiegris/cs161/cvsroot/src/testbin/triplesort/depend.mk,v  <--  depend.mk
+new revision: 1.2; previous revision: 1.1
+done
+[msiegris@rainbow src]$pwd
+/u/msiegris/cs161/src
+[msiegris@rainbow src]$cd configure [K[K[K[K[K[K[K[K[K[K[K[Kd configure [K[K[K[K[K[K[K[K[K[K[K[K[Kcd kern/conf/[K[K[Kmpile/a[KASST1/
+[msiegris@rainbow ASST1]$make dep[K[K[K[K[K[K[K[Kcd ../c[K[K/../conf/
+[msiegris@rainbow conf]$./config  [KASST2[K1
+Configuration ASST1
+Generating files... opt-*.h files.mk defs.mk Makefile autoconf.h autoconf.c
+Configuration in ../compile/ASST1 done
+Remember to make depend
+[msiegris@rainbow conf]$make dpe[K[Kepend
+make: *** No rule to make target `depend'.  Stop.
+[msiegris@rainbow conf]$cd ../compile/ASST1/
+[msiegris@rainbow ASST1]$make depend
+cs161-gcc   -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -g -nostdinc -I../../include -I../../dev -I.  -ffreestanding -D_KERNEL -G 0 -M ../../dev/generic/console.c ../../dev/lamebus/emu.c ../../dev/lamebus/lser.c ../../dev/lamebus/lhd.c ../../dev/generic/pseudorand.c ../../dev/generic/random.c ../../dev/lamebus/ltimer.c ../../dev/lamebus/lamebus.c ../../dev/lamebus/lrandom.c ../../dev/generic/beep.c ../../dev/lamebus/ltrace.c ../../dev/generic/rtclock.c ../../dev/lamebus/ltimer_att.c ../../dev/lamebus/con_lser.c ../../dev/lamebus/lhd_att.c ../../dev/lamebus/random_lrandom.c ../../dev/lamebus/rtclock_ltimer.c ../../dev/lamebus/ltrace_att.c ../../dev/lamebus/lser_att.c ../../dev/lamebus/lrandom_att.c ../../dev/lamebus/emu_att.c ../../dev/lamebus/beep_ltimer.c ../../dev/generic/pseudorand_att.c ../../asst1/catlock.c ../../asst1/catsem.c ../../fs/sfs/sfs_vnode.c ../../fs/sfs/sfs_fs.c ../../arch/mips/mips/dumbvm.c ../../asst1/stoplight.c ../../fs/sfs/sfs_io.c ../../arch/mips/mips/cache_mips1.S ../../arch/mips/mips/exception.S ../../arch/mips/mips/lamebus_mips.c ../../arch/mips/mips/interrupt.c ../../arch/mips/mips/pcb.c ../../arch/mips/mips/ram.c ../../arch/mips/mips/spl.c ../../arch/mips/mips/start.S ../../arch/mips/mips/switch.S ../../arch/mips/mips/syscall.c ../../arch/mips/mips/threadstart.S ../../arch/mips/mips/trap.c ../../arch/mips/mips/tlb_mips1.S ../../../lib/libc/mips-setjmp.S ../../lib/copyinout.c ../../lib/array.c ../../lib/bitmap.c ../../lib/queue.c ../../lib/kheap.c ../../lib/kprintf.c ../../lib/kgets.c ../../lib/misc.c ../../lib/ntoh.c ../../../lib/libc/__printf.c ../../../lib/libc/snprintf.c ../../../lib/libc/atoi.c ../../../lib/libc/bzero.c ../../../lib/libc/memcpy.c ../../../lib/libc/memmove.c ../../../lib/libc/strcat.c ../../../lib/libc/strchr.c ../../../lib/libc/strcmp.c ../../../lib/libc/strcpy.c ../../../lib/libc/strlen.c ../../../lib/libc/strrchr.c ../../../lib/libc/strtok_r.c ../../dev/init.c ../../fs/vfs/device.c ../../fs/vfs/vfscwd.c ../../fs/vfs/vfslist.c ../../fs/vfs/vfslookup.c ../../fs/vfs/vfspath.c ../../fs/vfs/vnode.c ../../fs/vfs/devnull.c ../../thread/hardclock.c ../../thread/synch.c ../../thread/scheduler.c ../../thread/thread.c ../../main/main.c ../../main/menu.c ../../main/hello.c ../../userprog/loadelf.c ../../userprog/runprogram.c ../../userprog/uio.c ../../test/arraytest.c ../../test/bitmaptest.c ../../test/queuetest.c ../../test/threadtest.c ../../test/tt3.c ../../test/synchtest.c ../../test/malloctest.c ../../test/fstest.c ../../compile/ASST1/autoconf.c > depend.mk
+[msiegris@rainbow ASST1]$amke[K[K[K[Kam[K[Kmake
+cs161-gcc   -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -g -nostdinc -I../../include -I../../dev -I.  -ffreestanding -D_KERNEL -G 0 -c ../../main/main.c
+../../main/main.c:1: error: expected declaration specifiers or ‘...’ before ‘sizeof’
+../../main/main.c:1: warning: data definition has no type or storage class
+../../main/main.c:1: warning: type defaults to ‘int’ in declaration of ‘assert’
+../../main/main.c:2: error: expected identifier or ‘(’ before ‘}’ token
+../../main/main.c: In function ‘shutdown’:
+../../main/main.c:12: warning: implicit declaration of function ‘kprintf’
+../../main/main.c:14: warning: implicit declaration of function ‘vfs_clearbootfs’
+../../main/main.c:15: warning: implicit declaration of function ‘vfs_clearcurdir’
+../../main/main.c:16: warning: implicit declaration of function ‘vfs_unmountall’
+../../main/main.c:18: warning: implicit declaration of function ‘splhigh’
+../../main/main.c:20: warning: implicit declaration of function ‘scheduler_shutdown’
+../../main/main.c:21: warning: implicit declaration of function ‘thread_shutdown’
+../../main/main.c: In function ‘sys_reboot’:
+../../main/main.c:37: error: ‘RB_REBOOT’ undeclared (first use in this function)
+../../main/main.c:37: error: (Each undeclared identifier is reported only once
+../../main/main.c:37: error: for each function it appears in.)
+../../main/main.c:38: error: ‘RB_HALT’ undeclared (first use in this function)
+../../main/main.c:39: error: ‘RB_POWEROFF’ undeclared (first use in this function)
+../../main/main.c:42: error: ‘EINVAL’ undeclared (first use in this function)
+../../main/main.c:50: warning: implicit declaration of function ‘md_halt’
+../../main/main.c:54: warning: implicit declaration of function ‘md_reboot’
+../../main/main.c:58: warning: implicit declaration of function ‘md_poweroff’
+../../main/main.c:62: warning: implicit declaration of function ‘panic’
+../../main/main.c: In function ‘kmain’:
+../../main/main.c:73: warning: implicit declaration of function ‘boot’
+../../main/main.c:75: warning: implicit declaration of function ‘menu’
+make: *** [main.o] Error 1
+[msiegris@rainbow ASST1]$pwd
+/u/msiegris/cs161/src/kern/compile/ASST1
+[msiegris@rainbow ASST1]$cd ../m[K../main/
+[msiegris@rainbow main]$rm main.c 
+rm: remove regular file `main.c'? y
+[msiegris@rainbow main]$cvs update -d mainc[K.c
+cvs update: warning: main.c was lost
+U main.c
+[msiegris@rainbow main]$[K[msiegris@rainbow main]$cd ../compile/ASST1/
+[msiegris@rainbow ASST1]$make dpe[K[Kepend
+cs161-gcc   -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -g -nostdinc -I../../include -I../../dev -I.  -ffreestanding -D_KERNEL -G 0 -M ../../dev/generic/console.c ../../dev/lamebus/emu.c ../../dev/lamebus/lser.c ../../dev/lamebus/lhd.c ../../dev/generic/pseudorand.c ../../dev/generic/random.c ../../dev/lamebus/ltimer.c ../../dev/lamebus/lamebus.c ../../dev/lamebus/lrandom.c ../../dev/generic/beep.c ../../dev/lamebus/ltrace.c ../../dev/generic/rtclock.c ../../dev/lamebus/ltimer_att.c ../../dev/lamebus/con_lser.c ../../dev/lamebus/lhd_att.c ../../dev/lamebus/random_lrandom.c ../../dev/lamebus/rtclock_ltimer.c ../../dev/lamebus/ltrace_att.c ../../dev/lamebus/lser_att.c ../../dev/lamebus/lrandom_att.c ../../dev/lamebus/emu_att.c ../../dev/lamebus/beep_ltimer.c ../../dev/generic/pseudorand_att.c ../../asst1/catlock.c ../../asst1/catsem.c ../../fs/sfs/sfs_vnode.c ../../fs/sfs/sfs_fs.c ../../arch/mips/mips/dumbvm.c ../../asst1/stoplight.c ../../fs/sfs/sfs_io.c ../../arch/mips/mips/cache_mips1.S ../../arch/mips/mips/exception.S ../../arch/mips/mips/lamebus_mips.c ../../arch/mips/mips/interrupt.c ../../arch/mips/mips/pcb.c ../../arch/mips/mips/ram.c ../../arch/mips/mips/spl.c ../../arch/mips/mips/start.S ../../arch/mips/mips/switch.S ../../arch/mips/mips/syscall.c ../../arch/mips/mips/threadstart.S ../../arch/mips/mips/trap.c ../../arch/mips/mips/tlb_mips1.S ../../../lib/libc/mips-setjmp.S ../../lib/copyinout.c ../../lib/array.c ../../lib/bitmap.c ../../lib/queue.c ../../lib/kheap.c ../../lib/kprintf.c ../../lib/kgets.c ../../lib/misc.c ../../lib/ntoh.c ../../../lib/libc/__printf.c ../../../lib/libc/snprintf.c ../../../lib/libc/atoi.c ../../../lib/libc/bzero.c ../../../lib/libc/memcpy.c ../../../lib/libc/memmove.c ../../../lib/libc/strcat.c ../../../lib/libc/strchr.c ../../../lib/libc/strcmp.c ../../../lib/libc/strcpy.c ../../../lib/libc/strlen.c ../../../lib/libc/strrchr.c ../../../lib/libc/strtok_r.c ../../dev/init.c ../../fs/vfs/device.c ../../fs/vfs/vfscwd.c ../../fs/vfs/vfslist.c ../../fs/vfs/vfslookup.c ../../fs/vfs/vfspath.c ../../fs/vfs/vnode.c ../../fs/vfs/devnull.c ../../thread/hardclock.c ../../thread/synch.c ../../thread/scheduler.c ../../thread/thread.c ../../main/main.c ../../main/menu.c ../../main/hello.c ../../userprog/loadelf.c ../../userprog/runprogram.c ../../userprog/uio.c ../../test/arraytest.c ../../test/bitmaptest.c ../../test/queuetest.c ../../test/threadtest.c ../../test/tt3.c ../../test/synchtest.c ../../test/malloctest.c ../../test/fstest.c ../../compile/ASST1/autoconf.c > depend.mk
+[msiegris@rainbow ASST1]$make [K
+cs161-gcc   -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -g -nostdinc -I../../include -I../../dev -I.  -ffreestanding -D_KERNEL -G 0 -c ../../main/main.c
+../../main/main.c: In function ‘boot’:
+../../main/main.c:76: warning: implicit declaration of function ‘hello’
+cs161-gcc   -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -g -nostdinc -I../../include -I../../dev -I.  -ffreestanding -D_KERNEL -G 0 -c ../../compile/ASST1/autoconf.c
+../../conf/newvers.sh ASST1
+*** This is ASST1 build #4 ***
+cs161-gcc   -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -g -nostdinc -I../../include -I../../dev -I.  -ffreestanding -D_KERNEL -G 0 -c vers.c
+cs161-ld   -nostdlib -Ttext 0x80001000 -T ../../arch/mips/conf/ldscript -G 0 console.o emu.o lser.o lhd.o pseudorand.o random.o ltimer.o lamebus.o lrandom.o beep.o ltrace.o rtclock.o ltimer_att.o con_lser.o lhd_att.o random_lrandom.o rtclock_ltimer.o ltrace_att.o lser_att.o lrandom_att.o emu_att.o beep_ltimer.o pseudorand_att.o catlock.o catsem.o sfs_vnode.o sfs_fs.o dumbvm.o stoplight.o sfs_io.o cache_mips1.o exception.o lamebus_mips.o interrupt.o pcb.o ram.o spl.o start.o switch.o syscall.o threadstart.o trap.o tlb_mips1.o mips-setjmp.o copyinout.o array.o bitmap.o queue.o kheap.o kprintf.o kgets.o misc.o ntoh.o __printf.o snprintf.o atoi.o bzero.o memcpy.o memmove.o strcat.o strchr.o strcmp.o strcpy.o strlen.o strrchr.o strtok_r.o init.o device.o vfscwd.o vfslist.o vfslookup.o vfspath.o vnode.o devnull.o hardclock.o synch.o scheduler.o thread.o main.o menu.o hello.o loadelf.o runprogram.o uio.o arraytest.o bitmaptest.o queuetest.o threadtest.o tt3.o synchtest.o malloctest.o fstest.o autoconf.o vers.o -o kernel
+cs161-size kernel
+   text	   data	    bss	    dec	    hex	filename
+ 162664	    480	   7668	 170812	  29b3c	kernel
+[msiegris@rainbow ASST1]$make install
+[ -d /u/msiegris/cs161/root ] || mkdir /u/msiegris/cs161/root
+cp kernel /u/msiegris/cs161/root/kernel-ASST1
+rm -f /u/msiegris/cs161/root/kernel
+ln -s kernel-ASST1 /u/msiegris/cs161/root/kernel
+[msiegris@rainbow ASST1]$cd ~cs[K[K/cs161/src/
+[msiegris@rainbow src]$make
+make includes
+make[1]: Entering directory `/u/msiegris/cs161/src'
+(cd kern && make includes)
+make[2]: Entering directory `/u/msiegris/cs161/src/kern'
+[ -d /u/msiegris/cs161/root/include/kern ] || mkdir -p /u/msiegris/cs161/root/include/kern
+[ -d /u/msiegris/cs161/root/include/mips ] || mkdir -p /u/msiegris/cs161/root/include/mips
+rm -f /u/msiegris/cs161/root/include/machine
+ln -s mips /u/msiegris/cs161/root/include/machine
+Installing kernel includes...
+Installing machine-dependent includes for mips...
+make[2]: Leaving directory `/u/msiegris/cs161/src/kern'
+(cd include && make includes)
+make[2]: Entering directory `/u/msiegris/cs161/src/include'
+[ -d /u/msiegris/cs161/root/include ] || mkdir -p /u/msiegris/cs161/root/include
+[ -d /u/msiegris/cs161/root/include/sys ] || mkdir -p /u/msiegris/cs161/root/include/sys
+Installing library includes...
+make[2]: Leaving directory `/u/msiegris/cs161/src/include'
+(cd lib/hostcompat && make includes)
+make[2]: Entering directory `/u/msiegris/cs161/src/lib/hostcompat'
+[ -d /u/msiegris/cs161/root/hostinclude ] || mkdir /u/msiegris/cs161/root/hostinclude
+rm -f /u/msiegris/cs161/root/hostinclude/kern
+ln -s ../include/kern /u/msiegris/cs161/root/hostinclude/kern
+cp hostcompat.h /u/msiegris/cs161/root/hostinclude
+make[2]: Leaving directory `/u/msiegris/cs161/src/lib/hostcompat'
+make[1]: Leaving directory `/u/msiegris/cs161/src'
+make depend
+make[1]: Entering directory `/u/msiegris/cs161/src'
+(cd include && make depend)
+make[2]: Entering directory `/u/msiegris/cs161/src/include'
+make[2]: Nothing to be done for `depend'.
+make[2]: Leaving directory `/u/msiegris/cs161/src/include'
+(cd lib && make depend)
+make[2]: Entering directory `/u/msiegris/cs161/src/lib'
+(cd crt0 && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/lib/crt0'
+make[3]: `depend' is up to date.
+make[3]: Leaving directory `/u/msiegris/cs161/src/lib/crt0'
+(cd libc && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/lib/libc'
+make syscalls.S
+make[4]: Entering directory `/u/msiegris/cs161/src/lib/libc'
+make[4]: `syscalls.S' is up to date.
+make[4]: Leaving directory `/u/msiegris/cs161/src/lib/libc'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M __printf.c snprintf.c printf.c atoi.c bzero.c memcmp.c memcpy.c memmove.c memset.c strcat.c strchr.c strcmp.c strcpy.c strlen.c strrchr.c strtok.c strtok_r.c __assert.c __puts.c err.c getchar.c putchar.c puts.c  abort.c errno.c exit.c getcwd.c random.c strerror.c system.c time.c mips-setjmp.S syscalls.S |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/lib/libc'
+(cd hostcompat && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/lib/hostcompat'
+gcc  -Wall -W -Wwrite-strings -O2 -I/u/msiegris/cs161/root/hostinclude  -MM err.c time.c hostcompat.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's/\.o/\.ho/' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > dependh.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/lib/hostcompat'
+make[2]: Leaving directory `/u/msiegris/cs161/src/lib'
+(cd bin && make depend)
+make[2]: Entering directory `/u/msiegris/cs161/src/bin'
+(cd true && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/true'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M true.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/true'
+(cd false && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/false'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M false.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/false'
+(cd sync && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/sync'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M sync.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/sync'
+(cd mkdir && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/mkdir'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M mkdir.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/mkdir'
+(cd rmdir && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/rmdir'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M rmdir.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/rmdir'
+(cd pwd && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/pwd'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M pwd.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/pwd'
+(cd cat && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/cat'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M cat.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/cat'
+(cd cp && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/cp'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M cp.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/cp'
+(cd ln && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/ln'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M ln.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/ln'
+(cd mv && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/mv'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M mv.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/mv'
+(cd rm && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/rm'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M rm.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/rm'
+(cd ls && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/ls'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M ls.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/ls'
+(cd sh && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/sh'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M sh.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+gcc  -Wall -W -Wwrite-strings -O2 -I/u/msiegris/cs161/root/hostinclude -DHOST -MM sh.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's/\.o/\.ho/' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp dependh.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/sh'
+make[2]: Leaving directory `/u/msiegris/cs161/src/bin'
+(cd sbin && make depend)
+make[2]: Entering directory `/u/msiegris/cs161/src/sbin'
+(cd reboot && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/reboot'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M reboot.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/reboot'
+(cd halt && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/halt'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M halt.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/halt'
+(cd poweroff && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/poweroff'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M poweroff.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/poweroff'
+(cd mksfs && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/mksfs'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M mksfs.c disk.c support.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+gcc  -Wall -W -Wwrite-strings -O2 -I/u/msiegris/cs161/root/hostinclude -DHOST -MM mksfs.c disk.c support.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's/\.o/\.ho/' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp dependh.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/mksfs'
+(cd dumpsfs && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/dumpsfs'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M dumpsfs.c disk.c support.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+gcc  -Wall -W -Wwrite-strings -O2 -I/u/msiegris/cs161/root/hostinclude -DHOST -MM dumpsfs.c disk.c support.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's/\.o/\.ho/' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp dependh.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/dumpsfs'
+make[2]: Leaving directory `/u/msiegris/cs161/src/sbin'
+(cd testbin && make depend)
+make[2]: Entering directory `/u/msiegris/cs161/src/testbin'
+(cd add && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/add'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M add.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/add'
+(cd argtest && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/argtest'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M argtest.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/argtest'
+(cd badcall && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/badcall'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M bad_execv.c bad_waitpid.c bad_open.c bad_read.c bad_write.c bad_close.c bad_reboot.c bad_sbrk.c bad_ioctl.c bad_lseek.c bad_fsync.c bad_ftruncate.c bad_stat.c bad_remove.c bad_rename.c bad_link.c bad_mkdir.c bad_rmdir.c bad_chdir.c bad_getdirentry.c bad_symlink.c bad_readlink.c bad_dup2.c bad_pipe.c bad_time.c bad_getcwd.c common_buf.c common_fds.c common_path.c driver.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/badcall'
+(cd bigfile && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/bigfile'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M bigfile.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/bigfile'
+(cd conman && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/conman'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M conman.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/conman'
+(cd crash && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/crash'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M crash.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/crash'
+(cd ctest && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/ctest'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M ctest.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/ctest'
+(cd dirconc && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/dirconc'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M dirconc.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/dirconc'
+(cd dirseek && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/dirseek'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M dirseek.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/dirseek'
+(cd dirtest && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/dirtest'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M dirtest.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/dirtest'
+(cd f_test && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/f_test'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M f_test.c f_read.c f_write.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/f_test'
+(cd farm && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/farm'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M farm.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/farm'
+(cd faulter && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/faulter'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M faulter.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/faulter'
+(cd filetest && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/filetest'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M filetest.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/filetest'
+(cd forkbomb && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/forkbomb'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M forkbomb.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/forkbomb'
+(cd forktest && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/forktest'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M forktest.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/forktest'
+(cd guzzle && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/guzzle'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M guzzle.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/guzzle'
+(cd hash && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/hash'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M hash.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+gcc  -Wall -W -Wwrite-strings -O2 -I/u/msiegris/cs161/root/hostinclude -DHOST -MM hash.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's/\.o/\.ho/' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp dependh.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/hash'
+(cd hog && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/hog'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M hog.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/hog'
+(cd huge && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/huge'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M huge.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/huge'
+(cd kitchen && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/kitchen'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M kitchen.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/kitchen'
+(cd matmult && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/matmult'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M matmult.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/matmult'
+(cd palin && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/palin'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M palin.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/palin'
+(cd parallelvm && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/parallelvm'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M parallelvm.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/parallelvm'
+(cd randcall && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/randcall'
+make calls.c
+make[4]: Entering directory `/u/msiegris/cs161/src/testbin/randcall'
+make[4]: `calls.c' is up to date.
+make[4]: Leaving directory `/u/msiegris/cs161/src/testbin/randcall'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M calls.c main.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/randcall'
+(cd rmdirtest && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/rmdirtest'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M rmdirtest.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/rmdirtest'
+(cd rmtest && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/rmtest'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M rmtest.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/rmtest'
+(cd sink && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/sink'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M sink.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/sink'
+(cd sort && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/sort'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M sort.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/sort'
+(cd sty && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/sty'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M sty.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/sty'
+(cd tail && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/tail'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M tail.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/tail'
+(cd tictac && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/tictac'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M tictac.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/tictac'
+(cd triplehuge && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/triplehuge'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M triplehuge.c triple.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/triplehuge'
+(cd triplemat && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/triplemat'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M triplemat.c triple.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/triplemat'
+(cd triplesort && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/triplesort'
+cs161-gcc  -nostdinc -I/u/msiegris/cs161/root/include  -mno-abicalls -fno-pic -Wall -W -Wwrite-strings -O2 -M triplesort.c triple.c |\
+	  awk '{x=$0~"^ ";for(i=1;i<=NF;i++){printf "%d %s\n",x,$i;x=1; }}'|\
+	  sed '/1 \\/d' | awk '{ printf "%s%s", $1?" \\\n ":"\n", $2 }' |\
+	  sed 's|/u/msiegris/cs161/root|$(OSTREE)|;$p;$x' > .deptmp
+mv -f .deptmp depend.mk
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/triplesort'
+make[2]: Leaving directory `/u/msiegris/cs161/src/testbin'
+(cd man && make depend)
+make[2]: Entering directory `/u/msiegris/cs161/src/man'
+(cd toplevel && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/toplevel'
+make[3]: Nothing to be done for `depend'.
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/toplevel'
+(cd bin && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/bin'
+make[3]: Nothing to be done for `depend'.
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/bin'
+(cd sbin && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/sbin'
+make[3]: Nothing to be done for `depend'.
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/sbin'
+(cd testbin && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/testbin'
+make[3]: Nothing to be done for `depend'.
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/testbin'
+(cd libc && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/libc'
+make[3]: Nothing to be done for `depend'.
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/libc'
+(cd syscall && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/syscall'
+make[3]: Nothing to be done for `depend'.
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/syscall'
+(cd dev && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/dev'
+make[3]: Nothing to be done for `depend'.
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/dev'
+(cd misc && make depend)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/misc'
+make[3]: Nothing to be done for `depend'.
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/misc'
+make[2]: Leaving directory `/u/msiegris/cs161/src/man'
+(cd kern && make depend)
+make[2]: Entering directory `/u/msiegris/cs161/src/kern'
+make[2]: Nothing to be done for `depend'.
+make[2]: Leaving directory `/u/msiegris/cs161/src/kern'
+make[1]: Leaving directory `/u/msiegris/cs161/src'
+make compile
+make[1]: Entering directory `/u/msiegris/cs161/src'
+(cd lib && make)
+make[2]: Entering directory `/u/msiegris/cs161/src/lib'
+(cd crt0 && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/lib/crt0'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/u/msiegris/cs161/src/lib/crt0'
+(cd libc && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/lib/libc'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/u/msiegris/cs161/src/lib/libc'
+(cd hostcompat && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/lib/hostcompat'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/u/msiegris/cs161/src/lib/hostcompat'
+make[2]: Leaving directory `/u/msiegris/cs161/src/lib'
+(cd lib && make install)
+make[2]: Entering directory `/u/msiegris/cs161/src/lib'
+(cd crt0 && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/lib/crt0'
+[ -d /u/msiegris/cs161/root/lib ] || mkdir /u/msiegris/cs161/root/lib
+cp crt0.o /u/msiegris/cs161/root/lib
+make[3]: Leaving directory `/u/msiegris/cs161/src/lib/crt0'
+(cd libc && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/lib/libc'
+[ -d /u/msiegris/cs161/root/lib ] || mkdir /u/msiegris/cs161/root/lib
+cp libc.a /u/msiegris/cs161/root/lib
+make[3]: Leaving directory `/u/msiegris/cs161/src/lib/libc'
+(cd hostcompat && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/lib/hostcompat'
+[ -d /u/msiegris/cs161/root/hostlib ] || mkdir /u/msiegris/cs161/root/hostlib
+cp libhostcompat.ha /u/msiegris/cs161/root/hostlib/libhostcompat.a
+ranlib /u/msiegris/cs161/root/hostlib/libhostcompat.a
+make[3]: Leaving directory `/u/msiegris/cs161/src/lib/hostcompat'
+make[2]: Leaving directory `/u/msiegris/cs161/src/lib'
+(cd bin && make)
+make[2]: Entering directory `/u/msiegris/cs161/src/bin'
+(cd true && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/true'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   true.o   -lc \
+	   -o true
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/true'
+(cd false && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/false'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   false.o   -lc \
+	   -o false
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/false'
+(cd sync && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/sync'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   sync.o   -lc \
+	   -o sync
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/sync'
+(cd mkdir && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/mkdir'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   mkdir.o   -lc \
+	   -o mkdir
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/mkdir'
+(cd rmdir && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/rmdir'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   rmdir.o   -lc \
+	   -o rmdir
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/rmdir'
+(cd pwd && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/pwd'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   pwd.o   -lc \
+	   -o pwd
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/pwd'
+(cd cat && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/cat'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   cat.o   -lc \
+	   -o cat
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/cat'
+(cd cp && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/cp'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   cp.o   -lc \
+	   -o cp
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/cp'
+(cd ln && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/ln'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   ln.o   -lc \
+	   -o ln
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/ln'
+(cd mv && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/mv'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   mv.o   -lc \
+	   -o mv
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/mv'
+(cd rm && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/rm'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   rm.o   -lc \
+	   -o rm
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/rm'
+(cd ls && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/ls'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   ls.o   -lc \
+	   -o ls
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/ls'
+(cd sh && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/sh'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   sh.o   -lc \
+	   -o sh
+gcc  -Wall -W -Wwrite-strings -O2 -I/u/msiegris/cs161/root/hostinclude -DHOST -c sh.c -o sh.ho
+gcc   sh.ho   \
+	  /u/msiegris/cs161/root/hostlib/libhostcompat.a -o host-sh
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/sh'
+make[2]: Leaving directory `/u/msiegris/cs161/src/bin'
+(cd sbin && make)
+make[2]: Entering directory `/u/msiegris/cs161/src/sbin'
+(cd reboot && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/reboot'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   reboot.o   -lc \
+	   -o reboot
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/reboot'
+(cd halt && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/halt'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   halt.o   -lc \
+	   -o halt
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/halt'
+(cd poweroff && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/poweroff'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   poweroff.o   -lc \
+	   -o poweroff
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/poweroff'
+(cd mksfs && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/mksfs'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   mksfs.o disk.o support.o   -lc \
+	   -o mksfs
+gcc  -Wall -W -Wwrite-strings -O2 -I/u/msiegris/cs161/root/hostinclude -DHOST -c mksfs.c -o mksfs.ho
+gcc   mksfs.ho disk.ho support.ho   \
+	  /u/msiegris/cs161/root/hostlib/libhostcompat.a -o host-mksfs
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/mksfs'
+(cd dumpsfs && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/dumpsfs'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   dumpsfs.o disk.o support.o   -lc \
+	   -o dumpsfs
+gcc  -Wall -W -Wwrite-strings -O2 -I/u/msiegris/cs161/root/hostinclude -DHOST -c dumpsfs.c -o dumpsfs.ho
+gcc   dumpsfs.ho disk.ho support.ho   \
+	  /u/msiegris/cs161/root/hostlib/libhostcompat.a -o host-dumpsfs
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/dumpsfs'
+make[2]: Leaving directory `/u/msiegris/cs161/src/sbin'
+(cd testbin && make)
+make[2]: Entering directory `/u/msiegris/cs161/src/testbin'
+(cd add && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/add'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   add.o   -lc \
+	   -o add
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/add'
+(cd argtest && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/argtest'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   argtest.o   -lc \
+	   -o argtest
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/argtest'
+(cd badcall && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/badcall'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   bad_execv.o bad_waitpid.o bad_open.o bad_read.o bad_write.o bad_close.o bad_reboot.o bad_sbrk.o bad_ioctl.o bad_lseek.o bad_fsync.o bad_ftruncate.o bad_stat.o bad_remove.o bad_rename.o bad_link.o bad_mkdir.o bad_rmdir.o bad_chdir.o bad_getdirentry.o bad_symlink.o bad_readlink.o bad_dup2.o bad_pipe.o bad_time.o bad_getcwd.o common_buf.o common_fds.o common_path.o driver.o   -lc \
+	   -o badcall
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/badcall'
+(cd bigfile && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/bigfile'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   bigfile.o   -lc \
+	   -o bigfile
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/bigfile'
+(cd conman && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/conman'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   conman.o   -lc \
+	   -o conman
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/conman'
+(cd crash && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/crash'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   crash.o   -lc \
+	   -o crash
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/crash'
+(cd ctest && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/ctest'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   ctest.o   -lc \
+	   -o ctest
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/ctest'
+(cd dirconc && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/dirconc'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   dirconc.o   -lc \
+	   -o dirconc
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/dirconc'
+(cd dirseek && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/dirseek'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   dirseek.o   -lc \
+	   -o dirseek
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/dirseek'
+(cd dirtest && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/dirtest'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   dirtest.o   -lc \
+	   -o dirtest
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/dirtest'
+(cd f_test && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/f_test'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   f_test.o f_read.o f_write.o   -lc \
+	   -o f_test
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/f_test'
+(cd farm && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/farm'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   farm.o   -lc \
+	   -o farm
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/farm'
+(cd faulter && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/faulter'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   faulter.o   -lc \
+	   -o faulter
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/faulter'
+(cd filetest && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/filetest'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   filetest.o   -lc \
+	   -o filetest
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/filetest'
+(cd forkbomb && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/forkbomb'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   forkbomb.o   -lc \
+	   -o forkbomb
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/forkbomb'
+(cd forktest && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/forktest'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   forktest.o   -lc \
+	   -o forktest
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/forktest'
+(cd guzzle && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/guzzle'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   guzzle.o   -lc \
+	   -o guzzle
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/guzzle'
+(cd hash && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/hash'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   hash.o   -lc \
+	   -o hash
+gcc  -Wall -W -Wwrite-strings -O2 -I/u/msiegris/cs161/root/hostinclude -DHOST -c hash.c -o hash.ho
+gcc   hash.ho   \
+	  /u/msiegris/cs161/root/hostlib/libhostcompat.a -o host-hash
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/hash'
+(cd hog && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/hog'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   hog.o   -lc \
+	   -o hog
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/hog'
+(cd huge && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/huge'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   huge.o   -lc \
+	   -o huge
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/huge'
+(cd kitchen && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/kitchen'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   kitchen.o   -lc \
+	   -o kitchen
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/kitchen'
+(cd matmult && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/matmult'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   matmult.o   -lc \
+	   -o matmult
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/matmult'
+(cd palin && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/palin'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   palin.o   -lc \
+	   -o palin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/palin'
+(cd parallelvm && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/parallelvm'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   parallelvm.o   -lc \
+	   -o parallelvm
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/parallelvm'
+(cd randcall && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/randcall'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   calls.o main.o   -lc \
+	   -o randcall
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/randcall'
+(cd rmdirtest && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/rmdirtest'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   rmdirtest.o   -lc \
+	   -o rmdirtest
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/rmdirtest'
+(cd rmtest && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/rmtest'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   rmtest.o   -lc \
+	   -o rmtest
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/rmtest'
+(cd sink && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/sink'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   sink.o   -lc \
+	   -o sink
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/sink'
+(cd sort && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/sort'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   sort.o   -lc \
+	   -o sort
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/sort'
+(cd sty && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/sty'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   sty.o   -lc \
+	   -o sty
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/sty'
+(cd tail && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/tail'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   tail.o   -lc \
+	   -o tail
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/tail'
+(cd tictac && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/tictac'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   tictac.o   -lc \
+	   -o tictac
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/tictac'
+(cd triplehuge && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/triplehuge'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   triplehuge.o triple.o   -lc \
+	   -o triplehuge
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/triplehuge'
+(cd triplemat && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/triplemat'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   triplemat.o triple.o   -lc \
+	   -o triplemat
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/triplemat'
+(cd triplesort && make all)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/triplesort'
+cs161-gcc -nostdlib -L/u/msiegris/cs161/root/lib /u/msiegris/cs161/root/lib/crt0.o   triplesort.o triple.o   -lc \
+	   -o triplesort
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/triplesort'
+make[2]: Leaving directory `/u/msiegris/cs161/src/testbin'
+(cd bin && make install)
+make[2]: Entering directory `/u/msiegris/cs161/src/bin'
+(cd true && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/true'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp true /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/true'
+(cd false && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/false'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp false /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/false'
+(cd sync && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/sync'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp sync /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/sync'
+(cd mkdir && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/mkdir'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp mkdir /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/mkdir'
+(cd rmdir && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/rmdir'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp rmdir /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/rmdir'
+(cd pwd && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/pwd'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp pwd /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/pwd'
+(cd cat && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/cat'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp cat /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/cat'
+(cd cp && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/cp'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp cp /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/cp'
+(cd ln && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/ln'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp ln /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/ln'
+(cd mv && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/mv'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp mv /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/mv'
+(cd rm && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/rm'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp rm /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/rm'
+(cd ls && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/ls'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp ls /u/msiegris/cs161/root/bin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/ls'
+(cd sh && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/bin/sh'
+[ -d /u/msiegris/cs161/root/bin ] || mkdir /u/msiegris/cs161/root/bin
+cp sh /u/msiegris/cs161/root/bin
+[ -d /u/msiegris/cs161/root/hostbin ] || mkdir /u/msiegris/cs161/root/hostbin
+cp host-sh /u/msiegris/cs161/root/hostbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/bin/sh'
+make[2]: Leaving directory `/u/msiegris/cs161/src/bin'
+(cd sbin && make install)
+make[2]: Entering directory `/u/msiegris/cs161/src/sbin'
+(cd reboot && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/reboot'
+[ -d /u/msiegris/cs161/root/sbin ] || mkdir /u/msiegris/cs161/root/sbin
+cp reboot /u/msiegris/cs161/root/sbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/reboot'
+(cd halt && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/halt'
+[ -d /u/msiegris/cs161/root/sbin ] || mkdir /u/msiegris/cs161/root/sbin
+cp halt /u/msiegris/cs161/root/sbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/halt'
+(cd poweroff && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/poweroff'
+[ -d /u/msiegris/cs161/root/sbin ] || mkdir /u/msiegris/cs161/root/sbin
+cp poweroff /u/msiegris/cs161/root/sbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/poweroff'
+(cd mksfs && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/mksfs'
+[ -d /u/msiegris/cs161/root/sbin ] || mkdir /u/msiegris/cs161/root/sbin
+cp mksfs /u/msiegris/cs161/root/sbin
+[ -d /u/msiegris/cs161/root/hostbin ] || mkdir /u/msiegris/cs161/root/hostbin
+cp host-mksfs /u/msiegris/cs161/root/hostbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/mksfs'
+(cd dumpsfs && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/sbin/dumpsfs'
+[ -d /u/msiegris/cs161/root/sbin ] || mkdir /u/msiegris/cs161/root/sbin
+cp dumpsfs /u/msiegris/cs161/root/sbin
+[ -d /u/msiegris/cs161/root/hostbin ] || mkdir /u/msiegris/cs161/root/hostbin
+cp host-dumpsfs /u/msiegris/cs161/root/hostbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/sbin/dumpsfs'
+make[2]: Leaving directory `/u/msiegris/cs161/src/sbin'
+(cd testbin && make install)
+make[2]: Entering directory `/u/msiegris/cs161/src/testbin'
+(cd add && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/add'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp add /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/add'
+(cd argtest && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/argtest'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp argtest /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/argtest'
+(cd badcall && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/badcall'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp badcall /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/badcall'
+(cd bigfile && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/bigfile'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp bigfile /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/bigfile'
+(cd conman && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/conman'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp conman /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/conman'
+(cd crash && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/crash'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp crash /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/crash'
+(cd ctest && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/ctest'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp ctest /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/ctest'
+(cd dirconc && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/dirconc'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp dirconc /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/dirconc'
+(cd dirseek && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/dirseek'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp dirseek /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/dirseek'
+(cd dirtest && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/dirtest'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp dirtest /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/dirtest'
+(cd f_test && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/f_test'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp f_test /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/f_test'
+(cd farm && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/farm'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp farm /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/farm'
+(cd faulter && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/faulter'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp faulter /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/faulter'
+(cd filetest && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/filetest'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp filetest /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/filetest'
+(cd forkbomb && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/forkbomb'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp forkbomb /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/forkbomb'
+(cd forktest && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/forktest'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp forktest /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/forktest'
+(cd guzzle && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/guzzle'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp guzzle /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/guzzle'
+(cd hash && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/hash'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp hash /u/msiegris/cs161/root/testbin
+[ -d /u/msiegris/cs161/root/hostbin ] || mkdir /u/msiegris/cs161/root/hostbin
+cp host-hash /u/msiegris/cs161/root/hostbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/hash'
+(cd hog && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/hog'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp hog /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/hog'
+(cd huge && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/huge'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp huge /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/huge'
+(cd kitchen && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/kitchen'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp kitchen /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/kitchen'
+(cd matmult && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/matmult'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp matmult /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/matmult'
+(cd palin && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/palin'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp palin /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/palin'
+(cd parallelvm && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/parallelvm'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp parallelvm /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/parallelvm'
+(cd randcall && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/randcall'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp randcall /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/randcall'
+(cd rmdirtest && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/rmdirtest'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp rmdirtest /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/rmdirtest'
+(cd rmtest && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/rmtest'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp rmtest /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/rmtest'
+(cd sink && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/sink'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp sink /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/sink'
+(cd sort && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/sort'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp sort /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/sort'
+(cd sty && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/sty'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp sty /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/sty'
+(cd tail && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/tail'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp tail /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/tail'
+(cd tictac && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/tictac'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp tictac /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/tictac'
+(cd triplehuge && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/triplehuge'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp triplehuge /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/triplehuge'
+(cd triplemat && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/triplemat'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp triplemat /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/triplemat'
+(cd triplesort && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/testbin/triplesort'
+[ -d /u/msiegris/cs161/root/testbin ] || mkdir /u/msiegris/cs161/root/testbin
+cp triplesort /u/msiegris/cs161/root/testbin
+make[3]: Leaving directory `/u/msiegris/cs161/src/testbin/triplesort'
+make[2]: Leaving directory `/u/msiegris/cs161/src/testbin'
+(cd man && make install)
+make[2]: Entering directory `/u/msiegris/cs161/src/man'
+(cd toplevel && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/toplevel'
+[ -d /u/msiegris/cs161/root/man ] || mkdir /u/msiegris/cs161/root/man
+chmod a+rx /u/msiegris/cs161/root/man
+cp *.html /u/msiegris/cs161/root/man
+chmod a+r /u/msiegris/cs161/root/man/*.html
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/toplevel'
+(cd bin && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/bin'
+[ -d /u/msiegris/cs161/root/man/bin ] || mkdir /u/msiegris/cs161/root/man/bin
+chmod a+rx /u/msiegris/cs161/root/man/bin
+cp *.html /u/msiegris/cs161/root/man/bin
+chmod a+r /u/msiegris/cs161/root/man/bin/*.html
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/bin'
+(cd sbin && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/sbin'
+[ -d /u/msiegris/cs161/root/man/sbin ] || mkdir /u/msiegris/cs161/root/man/sbin
+chmod a+rx /u/msiegris/cs161/root/man/sbin
+cp *.html /u/msiegris/cs161/root/man/sbin
+chmod a+r /u/msiegris/cs161/root/man/sbin/*.html
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/sbin'
+(cd testbin && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/testbin'
+[ -d /u/msiegris/cs161/root/man/testbin ] || mkdir /u/msiegris/cs161/root/man/testbin
+chmod a+rx /u/msiegris/cs161/root/man/testbin
+cp *.html /u/msiegris/cs161/root/man/testbin
+chmod a+r /u/msiegris/cs161/root/man/testbin/*.html
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/testbin'
+(cd libc && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/libc'
+[ -d /u/msiegris/cs161/root/man/libc ] || mkdir /u/msiegris/cs161/root/man/libc
+chmod a+rx /u/msiegris/cs161/root/man/libc
+cp *.html /u/msiegris/cs161/root/man/libc
+chmod a+r /u/msiegris/cs161/root/man/libc/*.html
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/libc'
+(cd syscall && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/syscall'
+[ -d /u/msiegris/cs161/root/man/syscall ] || mkdir /u/msiegris/cs161/root/man/syscall
+chmod a+rx /u/msiegris/cs161/root/man/syscall
+cp *.html /u/msiegris/cs161/root/man/syscall
+chmod a+r /u/msiegris/cs161/root/man/syscall/*.html
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/syscall'
+(cd dev && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/dev'
+[ -d /u/msiegris/cs161/root/man/dev ] || mkdir /u/msiegris/cs161/root/man/dev
+chmod a+rx /u/msiegris/cs161/root/man/dev
+cp *.html /u/msiegris/cs161/root/man/dev
+chmod a+r /u/msiegris/cs161/root/man/dev/*.html
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/dev'
+(cd misc && make install)
+make[3]: Entering directory `/u/msiegris/cs161/src/man/misc'
+[ -d /u/msiegris/cs161/root/man/misc ] || mkdir /u/msiegris/cs161/root/man/misc
+chmod a+rx /u/msiegris/cs161/root/man/misc
+cp *.html /u/msiegris/cs161/root/man/misc
+chmod a+r /u/msiegris/cs161/root/man/misc/*.html
+make[3]: Leaving directory `/u/msiegris/cs161/src/man/misc'
+make[2]: Leaving directory `/u/msiegris/cs161/src/man'
+(cd kern && make)
+make[2]: Entering directory `/u/msiegris/cs161/src/kern'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/u/msiegris/cs161/src/kern'
+(cd kern && make install)
+make[2]: Entering directory `/u/msiegris/cs161/src/kern'
+make[2]: Nothing to be done for `install'.
+make[2]: Leaving directory `/u/msiegris/cs161/src/kern'
+make[1]: Leaving directory `/u/msiegris/cs161/src'
+[msiegris@rainbow src]$cd ~/cs161/src
+[msiegris@rainbow src]$cvs diff 0[K-d[Kc
+cvs diff: Diffing .
+cvs diff: Diffing bin
+cvs diff: Diffing bin/cat
+cvs diff: Diffing bin/cp
+cvs diff: Diffing bin/false
+cvs diff: Diffing bin/ln
+cvs diff: Diffing bin/ls
+cvs diff: Diffing bin/mkdir
+cvs diff: Diffing bin/mv
+cvs diff: Diffing bin/pwd
+cvs diff: Diffing bin/rm
+cvs diff: Diffing bin/rmdir
+cvs diff: Diffing bin/sh
+cvs diff: Diffing bin/sync
+cvs diff: Diffing bin/true
+cvs diff: Diffing include
+cvs diff: Diffing include/sys
+cvs diff: Diffing kern
+cvs diff: Diffing kern/arch
+cvs diff: Diffing kern/arch/mips
+cvs diff: Diffing kern/arch/mips/conf
+cvs diff: Diffing kern/arch/mips/include
+cvs diff: Diffing kern/arch/mips/mips
+cvs diff: Diffing kern/asst1
+cvs diff: Diffing kern/compile
+cvs diff: Diffing kern/conf
+cvs diff: Diffing kern/dev
+cvs diff: Diffing kern/dev/generic
+cvs diff: Diffing kern/dev/lamebus
+cvs diff: Diffing kern/fs
+cvs diff: Diffing kern/fs/sfs
+cvs diff: Diffing kern/fs/vfs
+Index: kern/fs/vfs/devnull.c
+===================================================================
+RCS file: /u/msiegris/cs161/cvsroot/src/kern/fs/vfs/devnull.c,v
+retrieving revision 1.1.1.1
+diff -c -r1.1.1.1 devnull.c
+*** kern/fs/vfs/devnull.c	12 Feb 2009 01:40:04 -0000	1.1.1.1
+--- kern/fs/vfs/devnull.c	12 Feb 2009 06:49:28 -0000
+***************
+*** 17,22 ****
+--- 17,24 ----
+  	(void)dev;
+  	(void)openflags;
+  
++ 	DEGUG(DB_VM, "Null device opened\n");
++ 
+  	return 0;
+  }
+  
+***************
+*** 26,31 ****
+--- 28,36 ----
+  nullclose(struct device *dev)
+  {
+  	(void)dev;
++ 
++ 	DEBUG(DB_VM, "Null device closed\n");
++ 
+  	return 0;
+  }
+  
+cvs diff: Diffing kern/include
+cvs diff: Diffing kern/include/kern
+cvs diff: Diffing kern/lib
+Index: kern/lib/copyinout.c
+===================================================================
+RCS file: /u/msiegris/cs161/cvsroot/src/kern/lib/copyinout.c,v
+retrieving revision 1.1.1.1
+diff -c -r1.1.1.1 copyinout.c
+*** kern/lib/copyinout.c	12 Feb 2009 01:40:04 -0000	1.1.1.1
+--- kern/lib/copyinout.c	12 Feb 2009 06:48:39 -0000
+***************
+*** 112,117 ****
+--- 112,119 ----
+  int
+  copyin(const_userptr_t usersrc, void *dest, size_t len)
+  {
++ 	DEBUG(DB_VC, "Copyin len: %d\n", len);
++ 
+  	int result;
+  	size_t stoplen;
+  
+***************
+*** 148,153 ****
+--- 150,157 ----
+  int
+  copyout(const void *src, userptr_t userdest, size_t len)
+  {
++ 	DEBUG(DB_VC, "Copyout len: %d\n", len);
++ 
+  	int result;
+  	size_t stoplen;
+  
+Index: kern/lib/kheap.c
+===================================================================
+RCS file: /u/msiegris/cs161/cvsroot/src/kern/lib/kheap.c,v
+retrieving revision 1.1.1.1
+diff -c -r1.1.1.1 kheap.c
+*** kern/lib/kheap.c	12 Feb 2009 01:40:04 -0000	1.1.1.1
+--- kern/lib/kheap.c	12 Feb 2009 06:48:49 -0000
+***************
+*** 551,556 ****
+--- 551,557 ----
+  
+  		/* Round up to a whole number of pages. */
+  		npages = (sz + PAGE_SIZE - 1)/PAGE_SIZE;
++ 		DEBUG(DB_VM, "Allocating %d extra pages\n", npages);
+  		address = alloc_kpages(npages);
+  		if (address==0) {
+  			return NULL;
+Index: kern/lib/misc.c
+===================================================================
+RCS file: /u/msiegris/cs161/cvsroot/src/kern/lib/misc.c,v
+retrieving revision 1.1.1.1
+diff -c -r1.1.1.1 misc.c
+*** kern/lib/misc.c	12 Feb 2009 01:40:04 -0000	1.1.1.1
+--- kern/lib/misc.c	12 Feb 2009 06:48:52 -0000
+***************
+*** 10,15 ****
+--- 10,16 ----
+  {
+  	char *z = kmalloc(strlen(s)+1);
+  	if (z==NULL) {
++ 		DEBUG(DB_VM, "Unable to allocate space for string %s\n", s);
+  		return NULL;
+  	}
+  	strcpy(z, s);
+Index: kern/lib/queue.c
+===================================================================
+RCS file: /u/msiegris/cs161/cvsroot/src/kern/lib/queue.c,v
+retrieving revision 1.1.1.1
+diff -c -r1.1.1.1 queue.c
+*** kern/lib/queue.c	12 Feb 2009 01:40:04 -0000	1.1.1.1
+--- kern/lib/queue.c	12 Feb 2009 06:48:57 -0000
+***************
+*** 36,41 ****
+--- 36,42 ----
+  	}
+  	ndata = kmalloc(nsize * sizeof(void *));
+  	if (ndata == NULL) {
++ 		DEBUG(DB_VM, "Unable to create queue of size %d", nsize);
+  		return ENOMEM;
+  	}
+  	q->size = nsize;
+***************
+*** 55,60 ****
+--- 56,62 ----
+  {
+  	struct queue *q = kmalloc(sizeof(struct queue));
+  	if (q==NULL) {
++ 		DEBUG(DB_VM, "Unable to create queue.");
+  		return NULL;
+  	}
+  	q->size = size;
+cvs diff: Diffing kern/main
+Index: kern/main/menu.c
+===================================================================
+RCS file: /u/msiegris/cs161/cvsroot/src/kern/main/menu.c,v
+retrieving revision 1.1.1.1
+diff -c -r1.1.1.1 menu.c
+*** kern/main/menu.c	12 Feb 2009 01:40:04 -0000	1.1.1.1
+--- kern/main/menu.c	12 Feb 2009 06:48:15 -0000
+***************
+*** 77,82 ****
+--- 77,83 ----
+  	}
+  
+  	/* NOTREACHED: runprogram only returns on error. */
++ 	DEBUG(DB_VC, "runprogram(progname) failed!\n");
+  }
+  
+  /*
+***************
+*** 555,560 ****
+--- 556,562 ----
+  
+  		if (nargs >= MAXMENUARGS) {
+  			kprintf("Command line has too many words\n");
++ 			DEBUG(DB_VM, "Number of args: %d\n", nargs);
+  			return E2BIG;
+  		}
+  		args[nargs++] = word;
+cvs diff: Diffing kern/test
+cvs diff: Diffing kern/thread
+Index: kern/thread/hardclock.c
+===================================================================
+RCS file: /u/msiegris/cs161/cvsroot/src/kern/thread/hardclock.c,v
+retrieving revision 1.1.1.1
+diff -c -r1.1.1.1 hardclock.c
+*** kern/thread/hardclock.c	12 Feb 2009 01:40:05 -0000	1.1.1.1
+--- kern/thread/hardclock.c	12 Feb 2009 06:47:44 -0000
+***************
+*** 40,45 ****
+--- 40,47 ----
+  {
+  	int s;
+  
++ 	DEBUG(DB_VM, "Sleep suspended for %d seconds", num_secs);
++ 
+  	s = splhigh();
+  	while (num_secs > 0) {
+  		thread_sleep(&lbolt);
+cvs diff: Diffing kern/userprog
+cvs diff: Diffing kern/vm
+cvs diff: Diffing lib
+cvs diff: Diffing lib/crt0
+cvs diff: Diffing lib/hostcompat
+cvs diff: Diffing lib/libc
+cvs diff: Diffing man
+cvs diff: Diffing man/bin
+cvs diff: Diffing man/dev
+cvs diff: Diffing man/libc
+cvs diff: Diffing man/misc
+cvs diff: Diffing man/sbin
+cvs diff: Diffing man/syscall
+cvs diff: Diffing man/testbin
+cvs diff: Diffing man/toplevel
+cvs diff: Diffing mk
+cvs diff: Diffing sbin
+cvs diff: Diffing sbin/dumpsfs
+cvs diff: Diffing sbin/halt
+cvs diff: Diffing sbin/mksfs
+cvs diff: Diffing sbin/poweroff
+cvs diff: Diffing sbin/reboot
+cvs diff: Diffing testbin
+cvs diff: Diffing testbin/add
+cvs diff: Diffing testbin/argtest
+cvs diff: Diffing testbin/badcall
+cvs diff: Diffing testbin/bigfile
+cvs diff: Diffing testbin/conman
+cvs diff: Diffing testbin/crash
+cvs diff: Diffing testbin/ctest
+cvs diff: Diffing testbin/dirconc
+cvs diff: Diffing testbin/dirseek
+cvs diff: Diffing testbin/dirtest
+cvs diff: Diffing testbin/f_test
+cvs diff: Diffing testbin/farm
+cvs diff: Diffing testbin/faulter
+cvs diff: Diffing testbin/filetest
+cvs diff: Diffing testbin/forkbomb
+cvs diff: Diffing testbin/forktest
+cvs diff: Diffing testbin/guzzle
+cvs diff: Diffing testbin/hash
+cvs diff: Diffing testbin/hog
+cvs diff: Diffing testbin/huge
+cvs diff: Diffing testbin/kitchen
+cvs diff: Diffing testbin/malloctest
+cvs diff: Diffing testbin/matmult
+cvs diff: Diffing testbin/palin
+cvs diff: Diffing testbin/parallelvm
+cvs diff: Diffing testbin/randcall
+cvs diff: Diffing testbin/rmdirtest
+cvs diff: Diffing testbin/rmtest
+cvs diff: Diffing testbin/sink
+cvs diff: Diffing testbin/sort
+cvs diff: Diffing testbin/sty
+cvs diff: Diffing testbin/tail
+cvs diff: Diffing testbin/tictac
+cvs diff: Diffing testbin/triplehuge
+cvs diff: Diffing testbin/triplemat
+cvs diff: Diffing testbin/triplesort
+cvs diff: Diffing testbin/userthreads
+[msiegris@rainbow src]$cd ..
+[msiegris@rainbow cs161]$cvs commif[Kr[Kt
+cvs commit: Examining src
+cvs commit: Examining src/bin
+cvs commit: Examining src/bin/cat
+cvs commit: Examining src/bin/cp
+cvs commit: Examining src/bin/false
+cvs commit: Examining src/bin/ln
+cvs commit: Examining src/bin/ls
+cvs commit: Examining src/bin/mkdir
+cvs commit: Examining src/bin/mv
+cvs commit: Examining src/bin/pwd
+cvs commit: Examining src/bin/rm
+cvs commit: Examining src/bin/rmdir
+cvs commit: Examining src/bin/sh
+cvs commit: Examining src/bin/sync
+cvs commit: Examining src/bin/true
+cvs commit: Examining src/include
+cvs commit: Examining src/include/sys
+cvs commit: Examining src/kern
+cvs commit: Examining src/kern/arch
+cvs commit: Examining src/kern/arch/mips
+cvs commit: Examining src/kern/arch/mips/conf
+cvs commit: Examining src/kern/arch/mips/include
+cvs commit: Examining src/kern/arch/mips/mips
+cvs commit: Examining src/kern/asst1
+cvs commit: Examining src/kern/compile
+cvs commit: Examining src/kern/conf
+cvs commit: Examining src/kern/dev
+cvs commit: Examining src/kern/dev/generic
+cvs commit: Examining src/kern/dev/lamebus
+cvs commit: Examining src/kern/fs
+cvs commit: Examining src/kern/fs/sfs
+cvs commit: Examining src/kern/fs/vfs
+cvs commit: Examining src/kern/include
+cvs commit: Examining src/kern/include/kern
+cvs commit: Examining src/kern/lib
+cvs commit: Examining src/kern/main
+cvs commit: Examining src/kern/test
+cvs commit: Examining src/kern/thread
+cvs commit: Examining src/kern/userprog
+cvs commit: Examining src/kern/vm
+cvs commit: Examining src/lib
+cvs commit: Examining src/lib/crt0
+cvs commit: Examining src/lib/hostcompat
+cvs commit: Examining src/lib/libc
+cvs commit: Examining src/man
+cvs commit: Examining src/man/bin
+cvs commit: Examining src/man/dev
+cvs commit: Examining src/man/libc
+cvs commit: Examining src/man/misc
+cvs commit: Examining src/man/sbin
+cvs commit: Examining src/man/syscall
+cvs commit: Examining src/man/testbin
+cvs commit: Examining src/man/toplevel
+cvs commit: Examining src/mk
+cvs commit: Examining src/sbin
+cvs commit: Examining src/sbin/dumpsfs
+cvs commit: Examining src/sbin/halt
+cvs commit: Examining src/sbin/mksfs
+cvs commit: Examining src/sbin/poweroff
+cvs commit: Examining src/sbin/reboot
+cvs commit: Examining src/testbin
+cvs commit: Examining src/testbin/add
+cvs commit: Examining src/testbin/argtest
+cvs commit: Examining src/testbin/badcall
+cvs commit: Examining src/testbin/bigfile
+cvs commit: Examining src/testbin/conman
+cvs commit: Examining src/testbin/crash
+cvs commit: Examining src/testbin/ctest
+cvs commit: Examining src/testbin/dirconc
+cvs commit: Examining src/testbin/dirseek
+cvs commit: Examining src/testbin/dirtest
+cvs commit: Examining src/testbin/f_test
+cvs commit: Examining src/testbin/farm
+cvs commit: Examining src/testbin/faulter
+cvs commit: Examining src/testbin/filetest
+cvs commit: Examining src/testbin/forkbomb
+cvs commit: Examining src/testbin/forktest
+cvs commit: Examining src/testbin/guzzle
+cvs commit: Examining src/testbin/hash
+cvs commit: Examining src/testbin/hog
+cvs commit: Examining src/testbin/huge
+cvs commit: Examining src/testbin/kitchen
+cvs commit: Examining src/testbin/malloctest
+cvs commit: Examining src/testbin/matmult
+cvs commit: Examining src/testbin/palin
+cvs commit: Examining src/testbin/parallelvm
+cvs commit: Examining src/testbin/randcall
+cvs commit: Examining src/testbin/rmdirtest
+cvs commit: Examining src/testbin/rmtest
+cvs commit: Examining src/testbin/sink
+cvs commit: Examining src/testbin/sort
+cvs commit: Examining src/testbin/sty
+cvs commit: Examining src/testbin/tail
+cvs commit: Examining src/testbin/tictac
+cvs commit: Examining src/testbin/triplehuge
+cvs commit: Examining src/testbin/triplemat
+cvs commit: Examining src/testbin/triplesort
+cvs commit: Examining src/testbin/userthreads
+[?1049h[?1h=[1;39r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[39;1H"/tmp/cvs3WInYP" "/tmp/cvs3WInYP" 9L, 309C[2;1HCVS: ----------------------------------------------------------------------
+CVS: Enter Log.  Lines beginning with `CVS:' are removed automatically
+CVS:
+CVS: Committing in src/kern/fs/vfs
+CVS:
+CVS: Modified Files:
+CVS:    devnull.c
+CVS: ----------------------------------------------------------------------
+[1m[34m~                                                                               [11;1H~                                                                               [12;1H~                                                                               [13;1H~                                                                               [14;1H~                                                                               [15;1H~                                                                               [16;1H~                                                                               [17;1H~                                                                               [18;1H~                                                                               [19;1H~                                                                               [20;1H~                                                                               [21;1H~                                                                               [22;1H~                                                                               [23;1H~                                                                               [24;1H~                                                                               [25;1H~                                                                               [26;1H~                                                                               [27;1H~                                                                               [28;1H~                                                                               [29;1H~                                                                               [30;1H~                                                                               [31;1H~                                                                               [32;1H~                                                                               [33;1H~                                                                               [34;1H~                                                                               [35;1H~                                                                               [36;1H~                                                                               [37;1H~                                                                               [38;1H~                                                                               [1;1H[?12l[?25h
+
+[2;1H[1;1H
+[1;1H[?25l[m[39;1H[1m-- INSERT --[m[39;13H[K[1;1H[?12l[?25h[?25l [?12l[?25h[39;1H[K[1;1H[?25l[?12l[?25h[?25l[39;1H:[?12l[?25hwq[?25l"/tmp/cvs3WInYP" "/tmp/cvs3WInYP" 9L, 310C written
+[?1l>[?12l[?25h[?1049lChecking in src/kern/fs/vfs/devnull.c;
+/u/msiegris/cs161/cvsroot/src/kern/fs/vfs/devnull.c,v  <--  devnull.c
+new revision: 1.2; previous revision: 1.1
+done
+[?1049h[?1h=[1;39r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[39;1H"/tmp/cvsfV7mKT" "/tmp/cvsfV7mKT" 9L, 332C[2;1HCVS: ----------------------------------------------------------------------
+CVS: Enter Log.  Lines beginning with `CVS:' are removed automatically
+CVS:
+CVS: Committing in src/kern/lib
+CVS:
+CVS: Modified Files:
+CVS:    copyinout.c kheap.c misc.c queue.c
+CVS: ----------------------------------------------------------------------
+[1m[34m~                                                                               [11;1H~                                                                               [12;1H~                                                                               [13;1H~                                                                               [14;1H~                                                                               [15;1H~                                                                               [16;1H~                                                                               [17;1H~                                                                               [18;1H~                                                                               [19;1H~                                                                               [20;1H~                                                                               [21;1H~                                                                               [22;1H~                                                                               [23;1H~                                                                               [24;1H~                                                                               [25;1H~                                                                               [26;1H~                                                                               [27;1H~                                                                               [28;1H~                                                                               [29;1H~                                                                               [30;1H~                                                                               [31;1H~                                                                               [32;1H~                                                                               [33;1H~                                                                               [34;1H~                                                                               [35;1H~                                                                               [36;1H~                                                                               [37;1H~                                                                               [38;1H~                                                                               [1;1H[?12l[?25h[?25l[m[39;1H[K[39;1H:[?12l[?25hq[?25l[39;1H[K[39;1H[?1l>[?12l[?25h[?1049l
+Log message unchanged or not specified
+a)bort, c)ontinue, e)dit, !)reuse this message unchanged for remaining dirs
+Action: (continue) !
+Checking in src/kern/lib/copyinout.c;
+/u/msiegris/cs161/cvsroot/src/kern/lib/copyinout.c,v  <--  copyinout.c
+new revision: 1.2; previous revision: 1.1
+done
+Checking in src/kern/lib/kheap.c;
+/u/msiegris/cs161/cvsroot/src/kern/lib/kheap.c,v  <--  kheap.c
+new revision: 1.2; previous revision: 1.1
+done
+Checking in src/kern/lib/misc.c;
+/u/msiegris/cs161/cvsroot/src/kern/lib/misc.c,v  <--  misc.c
+new revision: 1.2; previous revision: 1.1
+done
+Checking in src/kern/lib/queue.c;
+/u/msiegris/cs161/cvsroot/src/kern/lib/queue.c,v  <--  queue.c
+new revision: 1.2; previous revision: 1.1
+done
+Checking in src/kern/main/menu.c;
+/u/msiegris/cs161/cvsroot/src/kern/main/menu.c,v  <--  menu.c
+new revision: 1.2; previous revision: 1.1
+done
+Checking in src/kern/thread/hardclock.c;
+/u/msiegris/cs161/cvsroot/src/kern/thread/hardclock.c,v  <--  hardclock.c
+new revision: 1.2; previous revision: 1.1
+done
+[msiegris@rainbow cs161]$cvs tags[K asst1-end src
+cvs tag: Tagging src
+T src/.cvsignore
+T src/CHANGES
+T src/COPYING
+T src/Makefile
+T src/configure
+T src/defs.mk.sample
+cvs tag: Tagging src/bin
+T src/bin/Makefile
+cvs tag: Tagging src/bin/cat
+T src/bin/cat/.cvsignore
+T src/bin/cat/Makefile
+T src/bin/cat/cat.c
+T src/bin/cat/depend.mk
+cvs tag: Tagging src/bin/cp
+T src/bin/cp/.cvsignore
+T src/bin/cp/Makefile
+T src/bin/cp/cp.c
+T src/bin/cp/depend.mk
+cvs tag: Tagging src/bin/false
+T src/bin/false/.cvsignore
+T src/bin/false/Makefile
+T src/bin/false/depend.mk
+T src/bin/false/false.c
+cvs tag: Tagging src/bin/ln
+T src/bin/ln/.cvsignore
+T src/bin/ln/Makefile
+T src/bin/ln/depend.mk
+T src/bin/ln/ln.c
+cvs tag: Tagging src/bin/ls
+T src/bin/ls/.cvsignore
+T src/bin/ls/Makefile
+T src/bin/ls/depend.mk
+T src/bin/ls/ls.c
+cvs tag: Tagging src/bin/mkdir
+T src/bin/mkdir/.cvsignore
+T src/bin/mkdir/Makefile
+T src/bin/mkdir/depend.mk
+T src/bin/mkdir/mkdir.c
+cvs tag: Tagging src/bin/mv
+T src/bin/mv/.cvsignore
+T src/bin/mv/Makefile
+T src/bin/mv/depend.mk
+T src/bin/mv/mv.c
+cvs tag: Tagging src/bin/pwd
+T src/bin/pwd/.cvsignore
+T src/bin/pwd/Makefile
+T src/bin/pwd/depend.mk
+T src/bin/pwd/pwd.c
+cvs tag: Tagging src/bin/rm
+T src/bin/rm/.cvsignore
+T src/bin/rm/Makefile
+T src/bin/rm/depend.mk
+T src/bin/rm/rm.c
+cvs tag: Tagging src/bin/rmdir
+T src/bin/rmdir/.cvsignore
+T src/bin/rmdir/Makefile
+T src/bin/rmdir/depend.mk
+T src/bin/rmdir/rmdir.c
+cvs tag: Tagging src/bin/sh
+T src/bin/sh/.cvsignore
+T src/bin/sh/Makefile
+T src/bin/sh/depend.mk
+T src/bin/sh/dependh.mk
+T src/bin/sh/sh.c
+cvs tag: Tagging src/bin/sync
+T src/bin/sync/.cvsignore
+T src/bin/sync/Makefile
+T src/bin/sync/depend.mk
+T src/bin/sync/sync.c
+cvs tag: Tagging src/bin/true
+T src/bin/true/.cvsignore
+T src/bin/true/Makefile
+T src/bin/true/depend.mk
+T src/bin/true/true.c
+cvs tag: Tagging src/include
+T src/include/Makefile
+T src/include/assert.h
+T src/include/err.h
+T src/include/errno.h
+T src/include/fcntl.h
+T src/include/limits.h
+T src/include/setjmp.h
+T src/include/stdarg.h
+T src/include/stdio.h
+T src/include/stdlib.h
+T src/include/string.h
+T src/include/time.h
+T src/include/unistd.h
+cvs tag: Tagging src/include/sys
+T src/include/sys/ioctl.h
+T src/include/sys/reboot.h
+T src/include/sys/stat.h
+T src/include/sys/types.h
+T src/include/sys/wait.h
+cvs tag: Tagging src/kern
+T src/kern/Makefile
+cvs tag: Tagging src/kern/arch
+cvs tag: Tagging src/kern/arch/mips
+cvs tag: Tagging src/kern/arch/mips/conf
+T src/kern/arch/mips/conf/Makefile.mips
+T src/kern/arch/mips/conf/conf.arch
+T src/kern/arch/mips/conf/ldscript
+cvs tag: Tagging src/kern/arch/mips/include
+T src/kern/arch/mips/include/asmdefs.h
+T src/kern/arch/mips/include/bus.h
+T src/kern/arch/mips/include/ktypes.h
+T src/kern/arch/mips/include/pcb.h
+T src/kern/arch/mips/include/setjmp.h
+T src/kern/arch/mips/include/specialreg.h
+T src/kern/arch/mips/include/spl.h
+T src/kern/arch/mips/include/switchframe.h
+T src/kern/arch/mips/include/tlb.h
+T src/kern/arch/mips/include/trapframe.h
+T src/kern/arch/mips/include/types.h
+T src/kern/arch/mips/include/vm.h
+cvs tag: Tagging src/kern/arch/mips/mips
+T src/kern/arch/mips/mips/cache_mips1.S
+T src/kern/arch/mips/mips/dumbvm.c
+T src/kern/arch/mips/mips/exception.S
+T src/kern/arch/mips/mips/interrupt.c
+T src/kern/arch/mips/mips/lamebus_mips.c
+T src/kern/arch/mips/mips/pcb.c
+T src/kern/arch/mips/mips/ram.c
+T src/kern/arch/mips/mips/spl.c
+T src/kern/arch/mips/mips/start.S
+T src/kern/arch/mips/mips/switch.S
+T src/kern/arch/mips/mips/syscall.c
+T src/kern/arch/mips/mips/threadstart.S
+T src/kern/arch/mips/mips/tlb_mips1.S
+T src/kern/arch/mips/mips/trap.c
+cvs tag: Tagging src/kern/asst1
+T src/kern/asst1/catlock.c
+T src/kern/asst1/catsem.c
+T src/kern/asst1/stoplight.c
+cvs tag: Tagging src/kern/compile
+T src/kern/compile/.cvsignore
+cvs tag: Tagging src/kern/conf
+T src/kern/conf/ASST0
+T src/kern/conf/ASST1
+T src/kern/conf/ASST2
+T src/kern/conf/ASST2-OPT
+T src/kern/conf/ASST3
+T src/kern/conf/ASST4
+T src/kern/conf/ASST5
+T src/kern/conf/conf.kern
+T src/kern/conf/config
+T src/kern/conf/newvers.sh
+cvs tag: Tagging src/kern/dev
+T src/kern/dev/init.c
+cvs tag: Tagging src/kern/dev/generic
+T src/kern/dev/generic/beep.c
+T src/kern/dev/generic/beep.h
+T src/kern/dev/generic/console.c
+T src/kern/dev/generic/console.h
+T src/kern/dev/generic/pseudorand.c
+T src/kern/dev/generic/pseudorand.h
+T src/kern/dev/generic/pseudorand_att.c
+T src/kern/dev/generic/random.c
+T src/kern/dev/generic/random.h
+T src/kern/dev/generic/rtclock.c
+T src/kern/dev/generic/rtclock.h
+cvs tag: Tagging src/kern/dev/lamebus
+T src/kern/dev/lamebus/beep_ltimer.c
+T src/kern/dev/lamebus/con_lscreen.c
+T src/kern/dev/lamebus/con_lser.c
+T src/kern/dev/lamebus/conf.lamebus
+T src/kern/dev/lamebus/emu.c
+T src/kern/dev/lamebus/emu.h
+T src/kern/dev/lamebus/emu_att.c
+T src/kern/dev/lamebus/lamebus.c
+T src/kern/dev/lamebus/lamebus.h
+T src/kern/dev/lamebus/lhd.c
+T src/kern/dev/lamebus/lhd.h
+T src/kern/dev/lamebus/lhd_att.c
+T src/kern/dev/lamebus/lnet.c
+T src/kern/dev/lamebus/lnet_att.c
+T src/kern/dev/lamebus/lrandom.c
+T src/kern/dev/lamebus/lrandom.h
+T src/kern/dev/lamebus/lrandom_att.c
+T src/kern/dev/lamebus/lscreen.c
+T src/kern/dev/lamebus/lscreen.h
+T src/kern/dev/lamebus/lscreen_att.c
+T src/kern/dev/lamebus/lser.c
+T src/kern/dev/lamebus/lser.h
+T src/kern/dev/lamebus/lser_att.c
+T src/kern/dev/lamebus/ltimer.c
+T src/kern/dev/lamebus/ltimer.h
+T src/kern/dev/lamebus/ltimer_att.c
+T src/kern/dev/lamebus/ltrace.c
+T src/kern/dev/lamebus/ltrace.h
+T src/kern/dev/lamebus/ltrace_att.c
+T src/kern/dev/lamebus/random_lrandom.c
+T src/kern/dev/lamebus/rtclock_ltimer.c
+cvs tag: Tagging src/kern/fs
+cvs tag: Tagging src/kern/fs/sfs
+T src/kern/fs/sfs/sfs_fs.c
+T src/kern/fs/sfs/sfs_io.c
+T src/kern/fs/sfs/sfs_vnode.c
+cvs tag: Tagging src/kern/fs/vfs
+T src/kern/fs/vfs/device.c
+T src/kern/fs/vfs/devnull.c
+T src/kern/fs/vfs/vfscwd.c
+T src/kern/fs/vfs/vfslist.c
+T src/kern/fs/vfs/vfslookup.c
+T src/kern/fs/vfs/vfspath.c
+T src/kern/fs/vfs/vnode.c
+cvs tag: Tagging src/kern/include
+T src/kern/include/addrspace.h
+T src/kern/include/array.h
+T src/kern/include/bitmap.h
+T src/kern/include/clock.h
+T src/kern/include/curthread.h
+T src/kern/include/dev.h
+T src/kern/include/elf.h
+T src/kern/include/emufs.h
+T src/kern/include/fs.h
+T src/kern/include/lib.h
+T src/kern/include/queue.h
+T src/kern/include/scheduler.h
+T src/kern/include/sfs.h
+T src/kern/include/stdarg.h
+T src/kern/include/synch.h
+T src/kern/include/syscall.h
+T src/kern/include/test.h
+T src/kern/include/thread.h
+T src/kern/include/types.h
+T src/kern/include/uio.h
+T src/kern/include/version.h
+T src/kern/include/vfs.h
+T src/kern/include/vm.h
+T src/kern/include/vnode.h
+cvs tag: Tagging src/kern/include/kern
+T src/kern/include/kern/callno.h
+T src/kern/include/kern/errmsg.h
+T src/kern/include/kern/errno.h
+T src/kern/include/kern/ioctl.h
+T src/kern/include/kern/limits.h
+T src/kern/include/kern/sfs.h
+T src/kern/include/kern/stat.h
+T src/kern/include/kern/types.h
+T src/kern/include/kern/unistd.h
+cvs tag: Tagging src/kern/lib
+T src/kern/lib/array.c
+T src/kern/lib/bitmap.c
+T src/kern/lib/copyinout.c
+T src/kern/lib/kgets.c
+T src/kern/lib/kheap.c
+T src/kern/lib/kprintf.c
+T src/kern/lib/misc.c
+T src/kern/lib/ntoh.c
+T src/kern/lib/queue.c
+cvs tag: Tagging src/kern/main
+T src/kern/main/hello.c
+T src/kern/main/main.c
+T src/kern/main/menu.c
+cvs tag: Tagging src/kern/test
+T src/kern/test/arraytest.c
+T src/kern/test/bitmaptest.c
+T src/kern/test/fstest.c
+T src/kern/test/malloctest.c
+T src/kern/test/nettest.c
+T src/kern/test/queuetest.c
+T src/kern/test/synchtest.c
+T src/kern/test/threadtest.c
+T src/kern/test/tt3.c
+cvs tag: Tagging src/kern/thread
+T src/kern/thread/hardclock.c
+T src/kern/thread/scheduler.c
+T src/kern/thread/synch.c
+T src/kern/thread/thread.c
+cvs tag: Tagging src/kern/userprog
+T src/kern/userprog/loadelf.c
+T src/kern/userprog/runprogram.c
+T src/kern/userprog/uio.c
+cvs tag: Tagging src/kern/vm
+T src/kern/vm/addrspace.c
+cvs tag: Tagging src/lib
+T src/lib/Makefile
+cvs tag: Tagging src/lib/crt0
+T src/lib/crt0/Makefile
+T src/lib/crt0/mips-crt0.S
+cvs tag: Tagging src/lib/hostcompat
+T src/lib/hostcompat/.cvsignore
+T src/lib/hostcompat/Makefile
+T src/lib/hostcompat/dependh.mk
+T src/lib/hostcompat/err.c
+T src/lib/hostcompat/host-err.h
+T src/lib/hostcompat/hostcompat.c
+T src/lib/hostcompat/hostcompat.h
+T src/lib/hostcompat/time.c
+cvs tag: Tagging src/lib/libc
+T src/lib/libc/.cvsignore
+T src/lib/libc/Makefile
+T src/lib/libc/__assert.c
+T src/lib/libc/__printf.c
+T src/lib/libc/__puts.c
+T src/lib/libc/abort.c
+T src/lib/libc/atoi.c
+T src/lib/libc/bzero.c
+T src/lib/libc/callno-parse.sh
+T src/lib/libc/depend.mk
+T src/lib/libc/err.c
+T src/lib/libc/errno.c
+T src/lib/libc/exit.c
+T src/lib/libc/getchar.c
+T src/lib/libc/getcwd.c
+T src/lib/libc/memcmp.c
+T src/lib/libc/memcpy.c
+T src/lib/libc/memmove.c
+T src/lib/libc/memset.c
+T src/lib/libc/mips-setjmp.S
+T src/lib/libc/printf.c
+T src/lib/libc/putchar.c
+T src/lib/libc/puts.c
+T src/lib/libc/random.c
+T src/lib/libc/snprintf.c
+T src/lib/libc/strcat.c
+T src/lib/libc/strchr.c
+T src/lib/libc/strcmp.c
+T src/lib/libc/strcpy.c
+T src/lib/libc/strerror.c
+T src/lib/libc/strlen.c
+T src/lib/libc/strrchr.c
+T src/lib/libc/strtok.c
+T src/lib/libc/strtok_r.c
+T src/lib/libc/syscalls-mips.S
+T src/lib/libc/system.c
+T src/lib/libc/time.c
+cvs tag: Tagging src/man
+T src/man/Makefile
+cvs tag: Tagging src/man/bin
+T src/man/bin/Makefile
+T src/man/bin/cat.html
+T src/man/bin/cp.html
+T src/man/bin/false.html
+T src/man/bin/index.html
+T src/man/bin/ln.html
+T src/man/bin/ls.html
+T src/man/bin/mkdir.html
+T src/man/bin/mv.html
+T src/man/bin/pwd.html
+T src/man/bin/rm.html
+T src/man/bin/rmdir.html
+T src/man/bin/sh.html
+T src/man/bin/sync.html
+T src/man/bin/true.html
+cvs tag: Tagging src/man/dev
+T src/man/dev/Makefile
+T src/man/dev/beep.html
+T src/man/dev/con.html
+T src/man/dev/emu.html
+T src/man/dev/index.html
+T src/man/dev/lamebus.html
+T src/man/dev/lhd.html
+T src/man/dev/lnet.html
+T src/man/dev/lrandom.html
+T src/man/dev/lscreen.html
+T src/man/dev/lser.html
+T src/man/dev/ltimer.html
+T src/man/dev/null.html
+T src/man/dev/pseudorand.html
+T src/man/dev/random.html
+T src/man/dev/rtclock.html
+cvs tag: Tagging src/man/libc
+T src/man/libc/Makefile
+T src/man/libc/__vprintf.html
+T src/man/libc/abort.html
+T src/man/libc/assert.html
+T src/man/libc/atoi.html
+T src/man/libc/bzero.html
+T src/man/libc/calloc.html
+T src/man/libc/err.html
+T src/man/libc/exit.html
+T src/man/libc/free.html
+T src/man/libc/getchar.html
+T src/man/libc/getcwd.html
+T src/man/libc/index.html
+T src/man/libc/malloc.html
+T src/man/libc/memcpy.html
+T src/man/libc/memmove.html
+T src/man/libc/memset.html
+T src/man/libc/printf.html
+T src/man/libc/putchar.html
+T src/man/libc/puts.html
+T src/man/libc/random.html
+T src/man/libc/realloc.html
+T src/man/libc/setjmp.html
+T src/man/libc/snprintf.html
+T src/man/libc/stdarg.html
+T src/man/libc/strcat.html
+T src/man/libc/strchr.html
+T src/man/libc/strcmp.html
+T src/man/libc/strcpy.html
+T src/man/libc/strerror.html
+T src/man/libc/strlen.html
+T src/man/libc/strrchr.html
+T src/man/libc/strtok.html
+T src/man/libc/strtok_r.html
+T src/man/libc/system.html
+T src/man/libc/time.html
+T src/man/libc/warn.html
+cvs tag: Tagging src/man/misc
+T src/man/misc/Makefile
+T src/man/misc/index.html
+cvs tag: Tagging src/man/sbin
+T src/man/sbin/Makefile
+T src/man/sbin/dumpsfs.html
+T src/man/sbin/halt.html
+T src/man/sbin/index.html
+T src/man/sbin/mksfs.html
+T src/man/sbin/poweroff.html
+T src/man/sbin/reboot.html
+cvs tag: Tagging src/man/syscall
+T src/man/syscall/Makefile
+T src/man/syscall/__getcwd.html
+T src/man/syscall/__time.html
+T src/man/syscall/_exit.html
+T src/man/syscall/chdir.html
+T src/man/syscall/close.html
+T src/man/syscall/dup2.html
+T src/man/syscall/errno.html
+T src/man/syscall/execv.html
+T src/man/syscall/fork.html
+T src/man/syscall/fstat.html
+T src/man/syscall/fsync.html
+T src/man/syscall/ftruncate.html
+T src/man/syscall/getdirentry.html
+T src/man/syscall/getpid.html
+T src/man/syscall/index.html
+T src/man/syscall/ioctl.html
+T src/man/syscall/link.html
+T src/man/syscall/lseek.html
+T src/man/syscall/lstat.html
+T src/man/syscall/mkdir.html
+T src/man/syscall/open.html
+T src/man/syscall/pipe.html
+T src/man/syscall/read.html
+T src/man/syscall/readlink.html
+T src/man/syscall/reboot.html
+T src/man/syscall/remove.html
+T src/man/syscall/rename.html
+T src/man/syscall/rmdir.html
+T src/man/syscall/sbrk.html
+T src/man/syscall/stat.html
+T src/man/syscall/symlink.html
+T src/man/syscall/sync.html
+T src/man/syscall/waitpid.html
+T src/man/syscall/write.html
+cvs tag: Tagging src/man/testbin
+T src/man/testbin/Makefile
+T src/man/testbin/add.html
+T src/man/testbin/argtest.html
+T src/man/testbin/badcall.html
+T src/man/testbin/bigfile.html
+T src/man/testbin/conman.html
+T src/man/testbin/crash.html
+T src/man/testbin/ctest.html
+T src/man/testbin/dirseek.html
+T src/man/testbin/dirtest.html
+T src/man/testbin/f_test.html
+T src/man/testbin/farm.html
+T src/man/testbin/faulter.html
+T src/man/testbin/filetest.html
+T src/man/testbin/forkbomb.html
+T src/man/testbin/forktest.html
+T src/man/testbin/guzzle.html
+T src/man/testbin/hash.html
+T src/man/testbin/hog.html
+T src/man/testbin/huge.html
+T src/man/testbin/index.html
+T src/man/testbin/kitchen.html
+T src/man/testbin/malloctest.html
+T src/man/testbin/matmult.html
+T src/man/testbin/palin.html
+T src/man/testbin/randcall.html
+T src/man/testbin/rmdirtest.html
+T src/man/testbin/rmtest.html
+T src/man/testbin/sink.html
+T src/man/testbin/sort.html
+T src/man/testbin/sty.html
+T src/man/testbin/tail.html
+T src/man/testbin/tictac.html
+T src/man/testbin/triplehuge.html
+T src/man/testbin/triplemat.html
+T src/man/testbin/triplesort.html
+T src/man/testbin/userthreads.html
+cvs tag: Tagging src/man/toplevel
+T src/man/toplevel/Makefile
+T src/man/toplevel/index.html
+cvs tag: Tagging src/mk
+T src/mk/hostprog.mk
+T src/mk/lib.mk
+T src/mk/man.mk
+T src/mk/prog.mk
+cvs tag: Tagging src/sbin
+T src/sbin/Makefile
+cvs tag: Tagging src/sbin/dumpsfs
+T src/sbin/dumpsfs/.cvsignore
+T src/sbin/dumpsfs/Makefile
+T src/sbin/dumpsfs/depend.mk
+T src/sbin/dumpsfs/dependh.mk
+T src/sbin/dumpsfs/dumpsfs.c
+cvs tag: Tagging src/sbin/halt
+T src/sbin/halt/.cvsignore
+T src/sbin/halt/Makefile
+T src/sbin/halt/depend.mk
+T src/sbin/halt/halt.c
+cvs tag: Tagging src/sbin/mksfs
+T src/sbin/mksfs/.cvsignore
+T src/sbin/mksfs/Makefile
+T src/sbin/mksfs/depend.mk
+T src/sbin/mksfs/dependh.mk
+T src/sbin/mksfs/disk.c
+T src/sbin/mksfs/disk.h
+T src/sbin/mksfs/mksfs.c
+T src/sbin/mksfs/support.c
+T src/sbin/mksfs/support.h
+cvs tag: Tagging src/sbin/poweroff
+T src/sbin/poweroff/.cvsignore
+T src/sbin/poweroff/Makefile
+T src/sbin/poweroff/depend.mk
+T src/sbin/poweroff/poweroff.c
+cvs tag: Tagging src/sbin/reboot
+T src/sbin/reboot/.cvsignore
+T src/sbin/reboot/Makefile
+T src/sbin/reboot/depend.mk
+T src/sbin/reboot/reboot.c
+cvs tag: Tagging src/testbin
+T src/testbin/Makefile
+cvs tag: Tagging src/testbin/add
+T src/testbin/add/.cvsignore
+T src/testbin/add/Makefile
+T src/testbin/add/add.c
+T src/testbin/add/depend.mk
+cvs tag: Tagging src/testbin/argtest
+T src/testbin/argtest/.cvsignore
+T src/testbin/argtest/Makefile
+T src/testbin/argtest/argtest.c
+T src/testbin/argtest/depend.mk
+cvs tag: Tagging src/testbin/badcall
+T src/testbin/badcall/.cvsignore
+T src/testbin/badcall/Makefile
+T src/testbin/badcall/bad_chdir.c
+T src/testbin/badcall/bad_close.c
+T src/testbin/badcall/bad_dup2.c
+T src/testbin/badcall/bad_execv.c
+T src/testbin/badcall/bad_fsync.c
+T src/testbin/badcall/bad_ftruncate.c
+T src/testbin/badcall/bad_getcwd.c
+T src/testbin/badcall/bad_getdirentry.c
+T src/testbin/badcall/bad_ioctl.c
+T src/testbin/badcall/bad_link.c
+T src/testbin/badcall/bad_lseek.c
+T src/testbin/badcall/bad_mkdir.c
+T src/testbin/badcall/bad_open.c
+T src/testbin/badcall/bad_pipe.c
+T src/testbin/badcall/bad_read.c
+T src/testbin/badcall/bad_readlink.c
+T src/testbin/badcall/bad_reboot.c
+T src/testbin/badcall/bad_remove.c
+T src/testbin/badcall/bad_rename.c
+T src/testbin/badcall/bad_rmdir.c
+T src/testbin/badcall/bad_sbrk.c
+T src/testbin/badcall/bad_stat.c
+T src/testbin/badcall/bad_symlink.c
+T src/testbin/badcall/bad_time.c
+T src/testbin/badcall/bad_waitpid.c
+T src/testbin/badcall/bad_write.c
+T src/testbin/badcall/common_buf.c
+T src/testbin/badcall/common_fds.c
+T src/testbin/badcall/common_path.c
+T src/testbin/badcall/config.h
+T src/testbin/badcall/depend.mk
+T src/testbin/badcall/driver.c
+T src/testbin/badcall/test.h
+cvs tag: Tagging src/testbin/bigfile
+T src/testbin/bigfile/.cvsignore
+T src/testbin/bigfile/Makefile
+T src/testbin/bigfile/bigfile.c
+T src/testbin/bigfile/depend.mk
+cvs tag: Tagging src/testbin/conman
+T src/testbin/conman/.cvsignore
+T src/testbin/conman/Makefile
+T src/testbin/conman/conman.c
+T src/testbin/conman/depend.mk
+cvs tag: Tagging src/testbin/crash
+T src/testbin/crash/.cvsignore
+T src/testbin/crash/Makefile
+T src/testbin/crash/crash.c
+T src/testbin/crash/depend.mk
+cvs tag: Tagging src/testbin/ctest
+T src/testbin/ctest/.cvsignore
+T src/testbin/ctest/Makefile
+T src/testbin/ctest/ctest.c
+T src/testbin/ctest/depend.mk
+cvs tag: Tagging src/testbin/dirconc
+T src/testbin/dirconc/.cvsignore
+T src/testbin/dirconc/Makefile
+T src/testbin/dirconc/depend.mk
+T src/testbin/dirconc/dirconc.c
+cvs tag: Tagging src/testbin/dirseek
+T src/testbin/dirseek/.cvsignore
+T src/testbin/dirseek/Makefile
+T src/testbin/dirseek/depend.mk
+T src/testbin/dirseek/dirseek.c
+cvs tag: Tagging src/testbin/dirtest
+T src/testbin/dirtest/.cvsignore
+T src/testbin/dirtest/Makefile
+T src/testbin/dirtest/depend.mk
+T src/testbin/dirtest/dirtest.c
+cvs tag: Tagging src/testbin/f_test
+T src/testbin/f_test/.cvsignore
+T src/testbin/f_test/Makefile
+T src/testbin/f_test/depend.mk
+T src/testbin/f_test/f_hdr.h
+T src/testbin/f_test/f_read.c
+T src/testbin/f_test/f_test.c
+T src/testbin/f_test/f_write.c
+cvs tag: Tagging src/testbin/farm
+T src/testbin/farm/.cvsignore
+T src/testbin/farm/Makefile
+T src/testbin/farm/depend.mk
+T src/testbin/farm/farm.c
+cvs tag: Tagging src/testbin/faulter
+T src/testbin/faulter/.cvsignore
+T src/testbin/faulter/Makefile
+T src/testbin/faulter/depend.mk
+T src/testbin/faulter/faulter.c
+cvs tag: Tagging src/testbin/filetest
+T src/testbin/filetest/.cvsignore
+T src/testbin/filetest/Makefile
+T src/testbin/filetest/depend.mk
+T src/testbin/filetest/filetest.c
+cvs tag: Tagging src/testbin/forkbomb
+T src/testbin/forkbomb/.cvsignore
+T src/testbin/forkbomb/Makefile
+T src/testbin/forkbomb/depend.mk
+T src/testbin/forkbomb/forkbomb.c
+cvs tag: Tagging src/testbin/forktest
+T src/testbin/forktest/.cvsignore
+T src/testbin/forktest/Makefile
+T src/testbin/forktest/depend.mk
+T src/testbin/forktest/forktest.c
+cvs tag: Tagging src/testbin/guzzle
+T src/testbin/guzzle/.cvsignore
+T src/testbin/guzzle/Makefile
+T src/testbin/guzzle/depend.mk
+T src/testbin/guzzle/guzzle.c
+cvs tag: Tagging src/testbin/hash
+T src/testbin/hash/.cvsignore
+T src/testbin/hash/Makefile
+T src/testbin/hash/depend.mk
+T src/testbin/hash/dependh.mk
+T src/testbin/hash/hash.c
+cvs tag: Tagging src/testbin/hog
+T src/testbin/hog/.cvsignore
+T src/testbin/hog/Makefile
+T src/testbin/hog/depend.mk
+T src/testbin/hog/hog.c
+cvs tag: Tagging src/testbin/huge
+T src/testbin/huge/.cvsignore
+T src/testbin/huge/Makefile
+T src/testbin/huge/depend.mk
+T src/testbin/huge/huge.c
+cvs tag: Tagging src/testbin/kitchen
+T src/testbin/kitchen/.cvsignore
+T src/testbin/kitchen/Makefile
+T src/testbin/kitchen/depend.mk
+T src/testbin/kitchen/kitchen.c
+cvs tag: Tagging src/testbin/malloctest
+T src/testbin/malloctest/.cvsignore
+T src/testbin/malloctest/Makefile
+T src/testbin/malloctest/depend.mk
+T src/testbin/malloctest/malloctest.c
+cvs tag: Tagging src/testbin/matmult
+T src/testbin/matmult/.cvsignore
+T src/testbin/matmult/Makefile
+T src/testbin/matmult/depend.mk
+T src/testbin/matmult/matmult-orig.c
+T src/testbin/matmult/matmult.c
+cvs tag: Tagging src/testbin/palin
+T src/testbin/palin/.cvsignore
+T src/testbin/palin/Makefile
+T src/testbin/palin/depend.mk
+T src/testbin/palin/palin.c
+cvs tag: Tagging src/testbin/parallelvm
+T src/testbin/parallelvm/.cvsignore
+T src/testbin/parallelvm/Makefile
+T src/testbin/parallelvm/depend.mk
+T src/testbin/parallelvm/parallelvm.c
+cvs tag: Tagging src/testbin/randcall
+T src/testbin/randcall/.cvsignore
+T src/testbin/randcall/Makefile
+T src/testbin/randcall/callspecs.txt
+T src/testbin/randcall/depend.mk
+T src/testbin/randcall/extern.h
+T src/testbin/randcall/gencalls.sh
+T src/testbin/randcall/main.c
+cvs tag: Tagging src/testbin/rmdirtest
+T src/testbin/rmdirtest/.cvsignore
+T src/testbin/rmdirtest/Makefile
+T src/testbin/rmdirtest/depend.mk
+T src/testbin/rmdirtest/rmdirtest.c
+cvs tag: Tagging src/testbin/rmtest
+T src/testbin/rmtest/.cvsignore
+T src/testbin/rmtest/Makefile
+T src/testbin/rmtest/depend.mk
+T src/testbin/rmtest/rmtest.c
+cvs tag: Tagging src/testbin/sink
+T src/testbin/sink/.cvsignore
+T src/testbin/sink/Makefile
+T src/testbin/sink/depend.mk
+T src/testbin/sink/sink.c
+cvs tag: Tagging src/testbin/sort
+T src/testbin/sort/.cvsignore
+T src/testbin/sort/Makefile
+T src/testbin/sort/depend.mk
+T src/testbin/sort/sort.c
+cvs tag: Tagging src/testbin/sty
+T src/testbin/sty/.cvsignore
+T src/testbin/sty/Makefile
+T src/testbin/sty/depend.mk
+T src/testbin/sty/sty.c
+cvs tag: Tagging src/testbin/tail
+T src/testbin/tail/.cvsignore
+T src/testbin/tail/Makefile
+T src/testbin/tail/depend.mk
+T src/testbin/tail/tail.c
+cvs tag: Tagging src/testbin/tictac
+T src/testbin/tictac/.cvsignore
+T src/testbin/tictac/Makefile
+T src/testbin/tictac/depend.mk
+T src/testbin/tictac/tictac.c
+cvs tag: Tagging src/testbin/triplehuge
+T src/testbin/triplehuge/.cvsignore
+T src/testbin/triplehuge/Makefile
+T src/testbin/triplehuge/depend.mk
+T src/testbin/triplehuge/triple.c
+T src/testbin/triplehuge/triple.h
+T src/testbin/triplehuge/triplehuge.c
+cvs tag: Tagging src/testbin/triplemat
+T src/testbin/triplemat/.cvsignore
+T src/testbin/triplemat/Makefile
+T src/testbin/triplemat/depend.mk
+T src/testbin/triplemat/triplemat.c
+cvs tag: Tagging src/testbin/triplesort
+T src/testbin/triplesort/.cvsignore
+T src/testbin/triplesort/Makefile
+T src/testbin/triplesort/depend.mk
+T src/testbin/triplesort/triplesort.c
+cvs tag: Tagging src/testbin/userthreads
+T src/testbin/userthreads/.cvsignore
+T src/testbin/userthreads/Makefile
+T src/testbin/userthreads/depend.mk
+T src/testbin/userthreads/userthreads.c
+[msiegris@rainbow cs161]$cd asst1/
+[msiegris@rainbow asst1]$cvs export -rassr[Kt1-end src
+cvs export: Updating src
+U src/.cvsignore
+U src/CHANGES
+U src/COPYING
+U src/Makefile
+U src/configure
+U src/defs.mk.sample
+cvs export: Updating src/bin
+U src/bin/Makefile
+cvs export: Updating src/bin/cat
+U src/bin/cat/.cvsignore
+U src/bin/cat/Makefile
+U src/bin/cat/cat.c
+U src/bin/cat/depend.mk
+cvs export: Updating src/bin/cp
+U src/bin/cp/.cvsignore
+U src/bin/cp/Makefile
+U src/bin/cp/cp.c
+U src/bin/cp/depend.mk
+cvs export: Updating src/bin/false
+U src/bin/false/.cvsignore
+U src/bin/false/Makefile
+U src/bin/false/depend.mk
+U src/bin/false/false.c
+cvs export: Updating src/bin/ln
+U src/bin/ln/.cvsignore
+U src/bin/ln/Makefile
+U src/bin/ln/depend.mk
+U src/bin/ln/ln.c
+cvs export: Updating src/bin/ls
+U src/bin/ls/.cvsignore
+U src/bin/ls/Makefile
+U src/bin/ls/depend.mk
+U src/bin/ls/ls.c
+cvs export: Updating src/bin/mkdir
+U src/bin/mkdir/.cvsignore
+U src/bin/mkdir/Makefile
+U src/bin/mkdir/depend.mk
+U src/bin/mkdir/mkdir.c
+cvs export: Updating src/bin/mv
+U src/bin/mv/.cvsignore
+U src/bin/mv/Makefile
+U src/bin/mv/depend.mk
+U src/bin/mv/mv.c
+cvs export: Updating src/bin/pwd
+U src/bin/pwd/.cvsignore
+U src/bin/pwd/Makefile
+U src/bin/pwd/depend.mk
+U src/bin/pwd/pwd.c
+cvs export: Updating src/bin/rm
+U src/bin/rm/.cvsignore
+U src/bin/rm/Makefile
+U src/bin/rm/depend.mk
+U src/bin/rm/rm.c
+cvs export: Updating src/bin/rmdir
+U src/bin/rmdir/.cvsignore
+U src/bin/rmdir/Makefile
+U src/bin/rmdir/depend.mk
+U src/bin/rmdir/rmdir.c
+cvs export: Updating src/bin/sh
+U src/bin/sh/.cvsignore
+U src/bin/sh/Makefile
+U src/bin/sh/depend.mk
+U src/bin/sh/dependh.mk
+U src/bin/sh/sh.c
+cvs export: Updating src/bin/sync
+U src/bin/sync/.cvsignore
+U src/bin/sync/Makefile
+U src/bin/sync/depend.mk
+U src/bin/sync/sync.c
+cvs export: Updating src/bin/true
+U src/bin/true/.cvsignore
+U src/bin/true/Makefile
+U src/bin/true/depend.mk
+U src/bin/true/true.c
+cvs export: Updating src/include
+U src/include/Makefile
+U src/include/assert.h
+U src/include/err.h
+U src/include/errno.h
+U src/include/fcntl.h
+U src/include/limits.h
+U src/include/setjmp.h
+U src/include/stdarg.h
+U src/include/stdio.h
+U src/include/stdlib.h
+U src/include/string.h
+U src/include/time.h
+U src/include/unistd.h
+cvs export: Updating src/include/sys
+U src/include/sys/ioctl.h
+U src/include/sys/reboot.h
+U src/include/sys/stat.h
+U src/include/sys/types.h
+U src/include/sys/wait.h
+cvs export: Updating src/kern
+U src/kern/Makefile
+cvs export: Updating src/kern/arch
+cvs export: Updating src/kern/arch/mips
+cvs export: Updating src/kern/arch/mips/conf
+U src/kern/arch/mips/conf/Makefile.mips
+U src/kern/arch/mips/conf/conf.arch
+U src/kern/arch/mips/conf/ldscript
+cvs export: Updating src/kern/arch/mips/include
+U src/kern/arch/mips/include/asmdefs.h
+U src/kern/arch/mips/include/bus.h
+U src/kern/arch/mips/include/ktypes.h
+U src/kern/arch/mips/include/pcb.h
+U src/kern/arch/mips/include/setjmp.h
+U src/kern/arch/mips/include/specialreg.h
+U src/kern/arch/mips/include/spl.h
+U src/kern/arch/mips/include/switchframe.h
+U src/kern/arch/mips/include/tlb.h
+U src/kern/arch/mips/include/trapframe.h
+U src/kern/arch/mips/include/types.h
+U src/kern/arch/mips/include/vm.h
+cvs export: Updating src/kern/arch/mips/mips
+U src/kern/arch/mips/mips/cache_mips1.S
+U src/kern/arch/mips/mips/dumbvm.c
+U src/kern/arch/mips/mips/exception.S
+U src/kern/arch/mips/mips/interrupt.c
+U src/kern/arch/mips/mips/lamebus_mips.c
+U src/kern/arch/mips/mips/pcb.c
+U src/kern/arch/mips/mips/ram.c
+U src/kern/arch/mips/mips/spl.c
+U src/kern/arch/mips/mips/start.S
+U src/kern/arch/mips/mips/switch.S
+U src/kern/arch/mips/mips/syscall.c
+U src/kern/arch/mips/mips/threadstart.S
+U src/kern/arch/mips/mips/tlb_mips1.S
+U src/kern/arch/mips/mips/trap.c
+cvs export: Updating src/kern/asst1
+U src/kern/asst1/catlock.c
+U src/kern/asst1/catsem.c
+U src/kern/asst1/stoplight.c
+cvs export: Updating src/kern/compile
+U src/kern/compile/.cvsignore
+cvs export: Updating src/kern/conf
+U src/kern/conf/ASST0
+U src/kern/conf/ASST1
+U src/kern/conf/ASST2
+U src/kern/conf/ASST2-OPT
+U src/kern/conf/ASST3
+U src/kern/conf/ASST4
+U src/kern/conf/ASST5
+U src/kern/conf/conf.kern
+U src/kern/conf/config
+U src/kern/conf/newvers.sh
+cvs export: Updating src/kern/dev
+U src/kern/dev/init.c
+cvs export: Updating src/kern/dev/generic
+U src/kern/dev/generic/beep.c
+U src/kern/dev/generic/beep.h
+U src/kern/dev/generic/console.c
+U src/kern/dev/generic/console.h
+U src/kern/dev/generic/pseudorand.c
+U src/kern/dev/generic/pseudorand.h
+U src/kern/dev/generic/pseudorand_att.c
+U src/kern/dev/generic/random.c
+U src/kern/dev/generic/random.h
+U src/kern/dev/generic/rtclock.c
+U src/kern/dev/generic/rtclock.h
+cvs export: Updating src/kern/dev/lamebus
+U src/kern/dev/lamebus/beep_ltimer.c
+U src/kern/dev/lamebus/con_lscreen.c
+U src/kern/dev/lamebus/con_lser.c
+U src/kern/dev/lamebus/conf.lamebus
+U src/kern/dev/lamebus/emu.c
+U src/kern/dev/lamebus/emu.h
+U src/kern/dev/lamebus/emu_att.c
+U src/kern/dev/lamebus/lamebus.c
+U src/kern/dev/lamebus/lamebus.h
+U src/kern/dev/lamebus/lhd.c
+U src/kern/dev/lamebus/lhd.h
+U src/kern/dev/lamebus/lhd_att.c
+U src/kern/dev/lamebus/lnet.c
+U src/kern/dev/lamebus/lnet_att.c
+U src/kern/dev/lamebus/lrandom.c
+U src/kern/dev/lamebus/lrandom.h
+U src/kern/dev/lamebus/lrandom_att.c
+U src/kern/dev/lamebus/lscreen.c
+U src/kern/dev/lamebus/lscreen.h
+U src/kern/dev/lamebus/lscreen_att.c
+U src/kern/dev/lamebus/lser.c
+U src/kern/dev/lamebus/lser.h
+U src/kern/dev/lamebus/lser_att.c
+U src/kern/dev/lamebus/ltimer.c
+U src/kern/dev/lamebus/ltimer.h
+U src/kern/dev/lamebus/ltimer_att.c
+U src/kern/dev/lamebus/ltrace.c
+U src/kern/dev/lamebus/ltrace.h
+U src/kern/dev/lamebus/ltrace_att.c
+U src/kern/dev/lamebus/random_lrandom.c
+U src/kern/dev/lamebus/rtclock_ltimer.c
+cvs export: Updating src/kern/fs
+cvs export: Updating src/kern/fs/sfs
+U src/kern/fs/sfs/sfs_fs.c
+U src/kern/fs/sfs/sfs_io.c
+U src/kern/fs/sfs/sfs_vnode.c
+cvs export: Updating src/kern/fs/vfs
+U src/kern/fs/vfs/device.c
+U src/kern/fs/vfs/devnull.c
+U src/kern/fs/vfs/vfscwd.c
+U src/kern/fs/vfs/vfslist.c
+U src/kern/fs/vfs/vfslookup.c
+U src/kern/fs/vfs/vfspath.c
+U src/kern/fs/vfs/vnode.c
+cvs export: Updating src/kern/include
+U src/kern/include/addrspace.h
+U src/kern/include/array.h
+U src/kern/include/bitmap.h
+U src/kern/include/clock.h
+U src/kern/include/curthread.h
+U src/kern/include/dev.h
+U src/kern/include/elf.h
+U src/kern/include/emufs.h
+U src/kern/include/fs.h
+U src/kern/include/lib.h
+U src/kern/include/queue.h
+U src/kern/include/scheduler.h
+U src/kern/include/sfs.h
+U src/kern/include/stdarg.h
+U src/kern/include/synch.h
+U src/kern/include/syscall.h
+U src/kern/include/test.h
+U src/kern/include/thread.h
+U src/kern/include/types.h
+U src/kern/include/uio.h
+U src/kern/include/version.h
+U src/kern/include/vfs.h
+U src/kern/include/vm.h
+U src/kern/include/vnode.h
+cvs export: Updating src/kern/include/kern
+U src/kern/include/kern/callno.h
+U src/kern/include/kern/errmsg.h
+U src/kern/include/kern/errno.h
+U src/kern/include/kern/ioctl.h
+U src/kern/include/kern/limits.h
+U src/kern/include/kern/sfs.h
+U src/kern/include/kern/stat.h
+U src/kern/include/kern/types.h
+U src/kern/include/kern/unistd.h
+cvs export: Updating src/kern/lib
+U src/kern/lib/array.c
+U src/kern/lib/bitmap.c
+U src/kern/lib/copyinout.c
+U src/kern/lib/kgets.c
+U src/kern/lib/kheap.c
+U src/kern/lib/kprintf.c
+U src/kern/lib/misc.c
+U src/kern/lib/ntoh.c
+U src/kern/lib/queue.c
+cvs export: Updating src/kern/main
+U src/kern/main/hello.c
+U src/kern/main/main.c
+U src/kern/main/menu.c
+cvs export: Updating src/kern/test
+U src/kern/test/arraytest.c
+U src/kern/test/bitmaptest.c
+U src/kern/test/fstest.c
+U src/kern/test/malloctest.c
+U src/kern/test/nettest.c
+U src/kern/test/queuetest.c
+U src/kern/test/synchtest.c
+U src/kern/test/threadtest.c
+U src/kern/test/tt3.c
+cvs export: Updating src/kern/thread
+U src/kern/thread/hardclock.c
+U src/kern/thread/scheduler.c
+U src/kern/thread/synch.c
+U src/kern/thread/thread.c
+cvs export: Updating src/kern/userprog
+U src/kern/userprog/loadelf.c
+U src/kern/userprog/runprogram.c
+U src/kern/userprog/uio.c
+cvs export: Updating src/kern/vm
+U src/kern/vm/addrspace.c
+cvs export: Updating src/lib
+U src/lib/Makefile
+cvs export: Updating src/lib/crt0
+U src/lib/crt0/Makefile
+U src/lib/crt0/mips-crt0.S
+cvs export: Updating src/lib/hostcompat
+U src/lib/hostcompat/.cvsignore
+U src/lib/hostcompat/Makefile
+U src/lib/hostcompat/dependh.mk
+U src/lib/hostcompat/err.c
+U src/lib/hostcompat/host-err.h
+U src/lib/hostcompat/hostcompat.c
+U src/lib/hostcompat/hostcompat.h
+U src/lib/hostcompat/time.c
+cvs export: Updating src/lib/libc
+U src/lib/libc/.cvsignore
+U src/lib/libc/Makefile
+U src/lib/libc/__assert.c
+U src/lib/libc/__printf.c
+U src/lib/libc/__puts.c
+U src/lib/libc/abort.c
+U src/lib/libc/atoi.c
+U src/lib/libc/bzero.c
+U src/lib/libc/callno-parse.sh
+U src/lib/libc/depend.mk
+U src/lib/libc/err.c
+U src/lib/libc/errno.c
+U src/lib/libc/exit.c
+U src/lib/libc/getchar.c
+U src/lib/libc/getcwd.c
+U src/lib/libc/memcmp.c
+U src/lib/libc/memcpy.c
+U src/lib/libc/memmove.c
+U src/lib/libc/memset.c
+U src/lib/libc/mips-setjmp.S
+U src/lib/libc/printf.c
+U src/lib/libc/putchar.c
+U src/lib/libc/puts.c
+U src/lib/libc/random.c
+U src/lib/libc/snprintf.c
+U src/lib/libc/strcat.c
+U src/lib/libc/strchr.c
+U src/lib/libc/strcmp.c
+U src/lib/libc/strcpy.c
+U src/lib/libc/strerror.c
+U src/lib/libc/strlen.c
+U src/lib/libc/strrchr.c
+U src/lib/libc/strtok.c
+U src/lib/libc/strtok_r.c
+U src/lib/libc/syscalls-mips.S
+U src/lib/libc/system.c
+U src/lib/libc/time.c
+cvs export: Updating src/man
+U src/man/Makefile
+cvs export: Updating src/man/bin
+U src/man/bin/Makefile
+U src/man/bin/cat.html
+U src/man/bin/cp.html
+U src/man/bin/false.html
+U src/man/bin/index.html
+U src/man/bin/ln.html
+U src/man/bin/ls.html
+U src/man/bin/mkdir.html
+U src/man/bin/mv.html
+U src/man/bin/pwd.html
+U src/man/bin/rm.html
+U src/man/bin/rmdir.html
+U src/man/bin/sh.html
+U src/man/bin/sync.html
+U src/man/bin/true.html
+cvs export: Updating src/man/dev
+U src/man/dev/Makefile
+U src/man/dev/beep.html
+U src/man/dev/con.html
+U src/man/dev/emu.html
+U src/man/dev/index.html
+U src/man/dev/lamebus.html
+U src/man/dev/lhd.html
+U src/man/dev/lnet.html
+U src/man/dev/lrandom.html
+U src/man/dev/lscreen.html
+U src/man/dev/lser.html
+U src/man/dev/ltimer.html
+U src/man/dev/null.html
+U src/man/dev/pseudorand.html
+U src/man/dev/random.html
+U src/man/dev/rtclock.html
+cvs export: Updating src/man/libc
+U src/man/libc/Makefile
+U src/man/libc/__vprintf.html
+U src/man/libc/abort.html
+U src/man/libc/assert.html
+U src/man/libc/atoi.html
+U src/man/libc/bzero.html
+U src/man/libc/calloc.html
+U src/man/libc/err.html
+U src/man/libc/exit.html
+U src/man/libc/free.html
+U src/man/libc/getchar.html
+U src/man/libc/getcwd.html
+U src/man/libc/index.html
+U src/man/libc/malloc.html
+U src/man/libc/memcpy.html
+U src/man/libc/memmove.html
+U src/man/libc/memset.html
+U src/man/libc/printf.html
+U src/man/libc/putchar.html
+U src/man/libc/puts.html
+U src/man/libc/random.html
+U src/man/libc/realloc.html
+U src/man/libc/setjmp.html
+U src/man/libc/snprintf.html
+U src/man/libc/stdarg.html
+U src/man/libc/strcat.html
+U src/man/libc/strchr.html
+U src/man/libc/strcmp.html
+U src/man/libc/strcpy.html
+U src/man/libc/strerror.html
+U src/man/libc/strlen.html
+U src/man/libc/strrchr.html
+U src/man/libc/strtok.html
+U src/man/libc/strtok_r.html
+U src/man/libc/system.html
+U src/man/libc/time.html
+U src/man/libc/warn.html
+cvs export: Updating src/man/misc
+U src/man/misc/Makefile
+U src/man/misc/index.html
+cvs export: Updating src/man/sbin
+U src/man/sbin/Makefile
+U src/man/sbin/dumpsfs.html
+U src/man/sbin/halt.html
+U src/man/sbin/index.html
+U src/man/sbin/mksfs.html
+U src/man/sbin/poweroff.html
+U src/man/sbin/reboot.html
+cvs export: Updating src/man/syscall
+U src/man/syscall/Makefile
+U src/man/syscall/__getcwd.html
+U src/man/syscall/__time.html
+U src/man/syscall/_exit.html
+U src/man/syscall/chdir.html
+U src/man/syscall/close.html
+U src/man/syscall/dup2.html
+U src/man/syscall/errno.html
+U src/man/syscall/execv.html
+U src/man/syscall/fork.html
+U src/man/syscall/fstat.html
+U src/man/syscall/fsync.html
+U src/man/syscall/ftruncate.html
+U src/man/syscall/getdirentry.html
+U src/man/syscall/getpid.html
+U src/man/syscall/index.html
+U src/man/syscall/ioctl.html
+U src/man/syscall/link.html
+U src/man/syscall/lseek.html
+U src/man/syscall/lstat.html
+U src/man/syscall/mkdir.html
+U src/man/syscall/open.html
+U src/man/syscall/pipe.html
+U src/man/syscall/read.html
+U src/man/syscall/readlink.html
+U src/man/syscall/reboot.html
+U src/man/syscall/remove.html
+U src/man/syscall/rename.html
+U src/man/syscall/rmdir.html
+U src/man/syscall/sbrk.html
+U src/man/syscall/stat.html
+U src/man/syscall/symlink.html
+U src/man/syscall/sync.html
+U src/man/syscall/waitpid.html
+U src/man/syscall/write.html
+cvs export: Updating src/man/testbin
+U src/man/testbin/Makefile
+U src/man/testbin/add.html
+U src/man/testbin/argtest.html
+U src/man/testbin/badcall.html
+U src/man/testbin/bigfile.html
+U src/man/testbin/conman.html
+U src/man/testbin/crash.html
+U src/man/testbin/ctest.html
+U src/man/testbin/dirseek.html
+U src/man/testbin/dirtest.html
+U src/man/testbin/f_test.html
+U src/man/testbin/farm.html
+U src/man/testbin/faulter.html
+U src/man/testbin/filetest.html
+U src/man/testbin/forkbomb.html
+U src/man/testbin/forktest.html
+U src/man/testbin/guzzle.html
+U src/man/testbin/hash.html
+U src/man/testbin/hog.html
+U src/man/testbin/huge.html
+U src/man/testbin/index.html
+U src/man/testbin/kitchen.html
+U src/man/testbin/malloctest.html
+U src/man/testbin/matmult.html
+U src/man/testbin/palin.html
+U src/man/testbin/randcall.html
+U src/man/testbin/rmdirtest.html
+U src/man/testbin/rmtest.html
+U src/man/testbin/sink.html
+U src/man/testbin/sort.html
+U src/man/testbin/sty.html
+U src/man/testbin/tail.html
+U src/man/testbin/tictac.html
+U src/man/testbin/triplehuge.html
+U src/man/testbin/triplemat.html
+U src/man/testbin/triplesort.html
+U src/man/testbin/userthreads.html
+cvs export: Updating src/man/toplevel
+U src/man/toplevel/Makefile
+U src/man/toplevel/index.html
+cvs export: Updating src/mk
+U src/mk/hostprog.mk
+U src/mk/lib.mk
+U src/mk/man.mk
+U src/mk/prog.mk
+cvs export: Updating src/sbin
+U src/sbin/Makefile
+cvs export: Updating src/sbin/dumpsfs
+U src/sbin/dumpsfs/.cvsignore
+U src/sbin/dumpsfs/Makefile
+U src/sbin/dumpsfs/depend.mk
+U src/sbin/dumpsfs/dependh.mk
+U src/sbin/dumpsfs/dumpsfs.c
+cvs export: Updating src/sbin/halt
+U src/sbin/halt/.cvsignore
+U src/sbin/halt/Makefile
+U src/sbin/halt/depend.mk
+U src/sbin/halt/halt.c
+cvs export: Updating src/sbin/mksfs
+U src/sbin/mksfs/.cvsignore
+U src/sbin/mksfs/Makefile
+U src/sbin/mksfs/depend.mk
+U src/sbin/mksfs/dependh.mk
+U src/sbin/mksfs/disk.c
+U src/sbin/mksfs/disk.h
+U src/sbin/mksfs/mksfs.c
+U src/sbin/mksfs/support.c
+U src/sbin/mksfs/support.h
+cvs export: Updating src/sbin/poweroff
+U src/sbin/poweroff/.cvsignore
+U src/sbin/poweroff/Makefile
+U src/sbin/poweroff/depend.mk
+U src/sbin/poweroff/poweroff.c
+cvs export: Updating src/sbin/reboot
+U src/sbin/reboot/.cvsignore
+U src/sbin/reboot/Makefile
+U src/sbin/reboot/depend.mk
+U src/sbin/reboot/reboot.c
+cvs export: Updating src/testbin
+U src/testbin/Makefile
+cvs export: Updating src/testbin/add
+U src/testbin/add/.cvsignore
+U src/testbin/add/Makefile
+U src/testbin/add/add.c
+U src/testbin/add/depend.mk
+cvs export: Updating src/testbin/argtest
+U src/testbin/argtest/.cvsignore
+U src/testbin/argtest/Makefile
+U src/testbin/argtest/argtest.c
+U src/testbin/argtest/depend.mk
+cvs export: Updating src/testbin/badcall
+U src/testbin/badcall/.cvsignore
+U src/testbin/badcall/Makefile
+U src/testbin/badcall/bad_chdir.c
+U src/testbin/badcall/bad_close.c
+U src/testbin/badcall/bad_dup2.c
+U src/testbin/badcall/bad_execv.c
+U src/testbin/badcall/bad_fsync.c
+U src/testbin/badcall/bad_ftruncate.c
+U src/testbin/badcall/bad_getcwd.c
+U src/testbin/badcall/bad_getdirentry.c
+U src/testbin/badcall/bad_ioctl.c
+U src/testbin/badcall/bad_link.c
+U src/testbin/badcall/bad_lseek.c
+U src/testbin/badcall/bad_mkdir.c
+U src/testbin/badcall/bad_open.c
+U src/testbin/badcall/bad_pipe.c
+U src/testbin/badcall/bad_read.c
+U src/testbin/badcall/bad_readlink.c
+U src/testbin/badcall/bad_reboot.c
+U src/testbin/badcall/bad_remove.c
+U src/testbin/badcall/bad_rename.c
+U src/testbin/badcall/bad_rmdir.c
+U src/testbin/badcall/bad_sbrk.c
+U src/testbin/badcall/bad_stat.c
+U src/testbin/badcall/bad_symlink.c
+U src/testbin/badcall/bad_time.c
+U src/testbin/badcall/bad_waitpid.c
+U src/testbin/badcall/bad_write.c
+U src/testbin/badcall/common_buf.c
+U src/testbin/badcall/common_fds.c
+U src/testbin/badcall/common_path.c
+U src/testbin/badcall/config.h
+U src/testbin/badcall/depend.mk
+U src/testbin/badcall/driver.c
+U src/testbin/badcall/test.h
+cvs export: Updating src/testbin/bigfile
+U src/testbin/bigfile/.cvsignore
+U src/testbin/bigfile/Makefile
+U src/testbin/bigfile/bigfile.c
+U src/testbin/bigfile/depend.mk
+cvs export: Updating src/testbin/conman
+U src/testbin/conman/.cvsignore
+U src/testbin/conman/Makefile
+U src/testbin/conman/conman.c
+U src/testbin/conman/depend.mk
+cvs export: Updating src/testbin/crash
+U src/testbin/crash/.cvsignore
+U src/testbin/crash/Makefile
+U src/testbin/crash/crash.c
+U src/testbin/crash/depend.mk
+cvs export: Updating src/testbin/ctest
+U src/testbin/ctest/.cvsignore
+U src/testbin/ctest/Makefile
+U src/testbin/ctest/ctest.c
+U src/testbin/ctest/depend.mk
+cvs export: Updating src/testbin/dirconc
+U src/testbin/dirconc/.cvsignore
+U src/testbin/dirconc/Makefile
+U src/testbin/dirconc/depend.mk
+U src/testbin/dirconc/dirconc.c
+cvs export: Updating src/testbin/dirseek
+U src/testbin/dirseek/.cvsignore
+U src/testbin/dirseek/Makefile
+U src/testbin/dirseek/depend.mk
+U src/testbin/dirseek/dirseek.c
+cvs export: Updating src/testbin/dirtest
+U src/testbin/dirtest/.cvsignore
+U src/testbin/dirtest/Makefile
+U src/testbin/dirtest/depend.mk
+U src/testbin/dirtest/dirtest.c
+cvs export: Updating src/testbin/f_test
+U src/testbin/f_test/.cvsignore
+U src/testbin/f_test/Makefile
+U src/testbin/f_test/depend.mk
+U src/testbin/f_test/f_hdr.h
+U src/testbin/f_test/f_read.c
+U src/testbin/f_test/f_test.c
+U src/testbin/f_test/f_write.c
+cvs export: Updating src/testbin/farm
+U src/testbin/farm/.cvsignore
+U src/testbin/farm/Makefile
+U src/testbin/farm/depend.mk
+U src/testbin/farm/farm.c
+cvs export: Updating src/testbin/faulter
+U src/testbin/faulter/.cvsignore
+U src/testbin/faulter/Makefile
+U src/testbin/faulter/depend.mk
+U src/testbin/faulter/faulter.c
+cvs export: Updating src/testbin/filetest
+U src/testbin/filetest/.cvsignore
+U src/testbin/filetest/Makefile
+U src/testbin/filetest/depend.mk
+U src/testbin/filetest/filetest.c
+cvs export: Updating src/testbin/forkbomb
+U src/testbin/forkbomb/.cvsignore
+U src/testbin/forkbomb/Makefile
+U src/testbin/forkbomb/depend.mk
+U src/testbin/forkbomb/forkbomb.c
+cvs export: Updating src/testbin/forktest
+U src/testbin/forktest/.cvsignore
+U src/testbin/forktest/Makefile
+U src/testbin/forktest/depend.mk
+U src/testbin/forktest/forktest.c
+cvs export: Updating src/testbin/guzzle
+U src/testbin/guzzle/.cvsignore
+U src/testbin/guzzle/Makefile
+U src/testbin/guzzle/depend.mk
+U src/testbin/guzzle/guzzle.c
+cvs export: Updating src/testbin/hash
+U src/testbin/hash/.cvsignore
+U src/testbin/hash/Makefile
+U src/testbin/hash/depend.mk
+U src/testbin/hash/dependh.mk
+U src/testbin/hash/hash.c
+cvs export: Updating src/testbin/hog
+U src/testbin/hog/.cvsignore
+U src/testbin/hog/Makefile
+U src/testbin/hog/depend.mk
+U src/testbin/hog/hog.c
+cvs export: Updating src/testbin/huge
+U src/testbin/huge/.cvsignore
+U src/testbin/huge/Makefile
+U src/testbin/huge/depend.mk
+U src/testbin/huge/huge.c
+cvs export: Updating src/testbin/kitchen
+U src/testbin/kitchen/.cvsignore
+U src/testbin/kitchen/Makefile
+U src/testbin/kitchen/depend.mk
+U src/testbin/kitchen/kitchen.c
+cvs export: Updating src/testbin/malloctest
+U src/testbin/malloctest/.cvsignore
+U src/testbin/malloctest/Makefile
+U src/testbin/malloctest/depend.mk
+U src/testbin/malloctest/malloctest.c
+cvs export: Updating src/testbin/matmult
+U src/testbin/matmult/.cvsignore
+U src/testbin/matmult/Makefile
+U src/testbin/matmult/depend.mk
+U src/testbin/matmult/matmult-orig.c
+U src/testbin/matmult/matmult.c
+cvs export: Updating src/testbin/palin
+U src/testbin/palin/.cvsignore
+U src/testbin/palin/Makefile
+U src/testbin/palin/depend.mk
+U src/testbin/palin/palin.c
+cvs export: Updating src/testbin/parallelvm
+U src/testbin/parallelvm/.cvsignore
+U src/testbin/parallelvm/Makefile
+U src/testbin/parallelvm/depend.mk
+U src/testbin/parallelvm/parallelvm.c
+cvs export: Updating src/testbin/randcall
+U src/testbin/randcall/.cvsignore
+U src/testbin/randcall/Makefile
+U src/testbin/randcall/callspecs.txt
+U src/testbin/randcall/depend.mk
+U src/testbin/randcall/extern.h
+U src/testbin/randcall/gencalls.sh
+U src/testbin/randcall/main.c
+cvs export: Updating src/testbin/rmdirtest
+U src/testbin/rmdirtest/.cvsignore
+U src/testbin/rmdirtest/Makefile
+U src/testbin/rmdirtest/depend.mk
+U src/testbin/rmdirtest/rmdirtest.c
+cvs export: Updating src/testbin/rmtest
+U src/testbin/rmtest/.cvsignore
+U src/testbin/rmtest/Makefile
+U src/testbin/rmtest/depend.mk
+U src/testbin/rmtest/rmtest.c
+cvs export: Updating src/testbin/sink
+U src/testbin/sink/.cvsignore
+U src/testbin/sink/Makefile
+U src/testbin/sink/depend.mk
+U src/testbin/sink/sink.c
+cvs export: Updating src/testbin/sort
+U src/testbin/sort/.cvsignore
+U src/testbin/sort/Makefile
+U src/testbin/sort/depend.mk
+U src/testbin/sort/sort.c
+cvs export: Updating src/testbin/sty
+U src/testbin/sty/.cvsignore
+U src/testbin/sty/Makefile
+U src/testbin/sty/depend.mk
+U src/testbin/sty/sty.c
+cvs export: Updating src/testbin/tail
+U src/testbin/tail/.cvsignore
+U src/testbin/tail/Makefile
+U src/testbin/tail/depend.mk
+U src/testbin/tail/tail.c
+cvs export: Updating src/testbin/tictac
+U src/testbin/tictac/.cvsignore
+U src/testbin/tictac/Makefile
+U src/testbin/tictac/depend.mk
+U src/testbin/tictac/tictac.c
+cvs export: Updating src/testbin/triplehuge
+U src/testbin/triplehuge/.cvsignore
+U src/testbin/triplehuge/Makefile
+U src/testbin/triplehuge/depend.mk
+U src/testbin/triplehuge/triple.c
+U src/testbin/triplehuge/triple.h
+U src/testbin/triplehuge/triplehuge.c
+cvs export: Updating src/testbin/triplemat
+U src/testbin/triplemat/.cvsignore
+U src/testbin/triplemat/Makefile
+U src/testbin/triplemat/depend.mk
+U src/testbin/triplemat/triplemat.c
+cvs export: Updating src/testbin/triplesort
+U src/testbin/triplesort/.cvsignore
+U src/testbin/triplesort/Makefile
+U src/testbin/triplesort/depend.mk
+U src/testbin/triplesort/triplesort.c
+cvs export: Updating src/testbin/userthreads
+U src/testbin/userthreads/.cvsignore
+U src/testbin/userthreads/Makefile
+U src/testbin/userthreads/depend.mk
+U src/testbin/userthreads/userthreads.c
+[msiegris@rainbow asst1]$tar cfz asst1.tgz
+tar: Cowardly refusing to create an empty archive
+Try `tar --help' or `tar --usage' for more information.
+[msiegris@rainbow asst1]$tar cfz asst1.tgz[1@-
+tar: asst1.tgz: Cannot stat: No such file or directory
+tar: Error exit delayed from previous errors
+[msiegris@rainbow asst1]$a[Ktar cfz asst1/[K.g[Ktgz
+tar: Cowardly refusing to create an empty archive
+Try `tar --help' or `tar --usage' for more information.
+[msiegris@rainbow asst1]$tar --help
+Usage: tar [OPTION...] [FILE]...
+GNU `tar' saves many files together into a single tape or disk archive, and can
+restore individual files from the archive.
+
+Examples:
+  tar -cf archive.tar foo bar  # Create archive.tar from files foo and bar.
+  tar -tvf archive.tar         # List all files in archive.tar verbosely.
+  tar -xf archive.tar          # Extract all files from archive.tar.
+
+ Main operation mode:
+
+  -A, --catenate, --concatenate   append tar files to an archive
+  -c, --create               create a new archive
+  -d, --diff, --compare      find differences between archive and file system
+      --delete               delete from the archive (not on mag tapes!)
+  -r, --append               append files to the end of an archive
+  -t, --list                 list the contents of an archive
+      --test-label           test the archive volume label and exit
+  -u, --update               only append files newer than copy in archive
+  -x, --extract, --get       extract files from an archive
+
+ Operation modifiers:
+
+  -g, --listed-incremental=FILE   handle new GNU-format incremental backup
+  -G, --incremental          handle old GNU-format incremental backup
+      --ignore-failed-read   do not exit with nonzero on unreadable files
+  -n, --seek                 archive is seekable
+      --occurrence[=NUMBER]  process only the NUMBERth occurrence of each file
+                             in the archive; this option is valid only in
+                             conjunction with one of the subcommands --delete,
+                             --diff, --extract or --list and when a list of
+                             files is given either on the command line or via
+                             the -T option; NUMBER defaults to 1
+      --sparse-version=MAJOR[.MINOR]
+                             set version of the sparse format to use (implies
+                             --sparse)
+  -S, --sparse               handle sparse files efficiently
+
+ Overwrite control:
+
+  -k, --keep-old-files       don't replace existing files when extracting
+      --keep-newer-files     don't replace existing files that are newer than
+                             their archive copies
+      --no-overwrite-dir     preserve metadata of existing directories
+      --overwrite            overwrite existing files when extracting
+      --overwrite-dir        overwrite metadata of existing directories when
+                             extracting (default)
+      --recursive-unlink     empty hierarchies prior to extracting directory
+      --remove-files         remove files after adding them to the archive
+  -U, --unlink-first         remove each file prior to extracting over it
+  -W, --verify               attempt to verify the archive after writing it
+
+ Select output stream:
+
+      --ignore-command-error ignore exit codes of children
+      --no-ignore-command-error   treat non-zero exit codes of children as
+                             error
+  -O, --to-stdout            extract files to standard output
+      --to-command=COMMAND   pipe extracted files to another program
+
+ Handling of file attributes:
+
+      --acls                 Save the ACLs to the archive
+      --atime-preserve[=METHOD]   preserve access times on dumped files, either
+                             by restoring the times after reading
+                             (METHOD='replace'; default) or by not setting the
+                             times in the first place (METHOD='system')
+      --delay-directory-restore   delay setting modification times and
+                             permissions of extracted directories until the end
+                             of extraction
+      --group=NAME           force NAME as group for added files
+      --mode=CHANGES         force (symbolic) mode CHANGES for added files
+      --mtime=DATE-OR-FILE   set mtime for added files from DATE-OR-FILE
+  -m, --touch                don't extract file modified time
+      --no-acls              Don't extract the ACLs from the archive
+      --no-delay-directory-restore
+                             cancel the effect of --delay-directory-restore
+                             option
+      --no-same-owner        extract files as yourself
+      --no-same-permissions  apply the user's umask when extracting permissions
+                             from the archive (default for ordinary users)
+      --no-selinux           Don't extract the SELinux context from the archive
+                            
+      --no-xattrs            Don't extract the user/root xattrs from the
+                             archive
+      --numeric-owner        always use numbers for user/group names
+      --owner=NAME           force NAME as owner for added files
+  -p, --preserve-permissions, --same-permissions
+                             extract information about file permissions
+                             (default for superuser)
+      --preserve             same as both -p and -s
+      --same-owner           try extracting files with the same ownership
+  -s, --preserve-order, --same-order
+                             sort names to extract to match archive
+      --selinux              Save the SELinux context to the archive
+      --xattrs               Save the user/root xattrs to the archive
+
+ Device selection and switching:
+
+  -f, --file=ARCHIVE         use archive file or device ARCHIVE
+      --force-local          archive file is local even if it has a colon
+  -F, --info-script=NAME, --new-volume-script=NAME
+                             run script at end of each tape (implies -M)
+  -L, --tape-length=NUMBER   change tape after writing NUMBER x 1024 bytes
+  -M, --multi-volume         create/list/extract multi-volume archive
+      --rmt-command=COMMAND  use given rmt COMMAND instead of rmt
+      --rsh-command=COMMAND  use remote COMMAND instead of rsh
+      --volno-file=FILE      use/update the volume number in FILE
+
+ Device blocking:
+
+  -b, --blocking-factor=BLOCKS   BLOCKS x 512 bytes per record
+  -B, --read-full-records    reblock as we read (for 4.2BSD pipes)
+  -i, --ignore-zeros         ignore zeroed blocks in archive (means EOF)
+      --record-size=NUMBER   NUMBER of bytes per record, multiple of 512
+
+ Archive format selection:
+
+  -H, --format=FORMAT        create archive of the given format
+
+ FORMAT is one of the following:
+
+    gnu                      GNU tar 1.13.x format
+    oldgnu                   GNU format as per tar <= 1.12
+    pax                      POSIX 1003.1-2001 (pax) format
+    posix                    same as pax
+    ustar                    POSIX 1003.1-1988 (ustar) format
+    v7                       old V7 tar format
+
+  -j, --bzip2                filter the archive through bzip2
+      --old-archive, --portability
+                             same as --format=v7
+      --pax-option=keyword[[:]=value][,keyword[[:]=value]]...
+                             control pax keywords
+      --posix                same as --format=posix
+      --use-compress-program=PROG
+                             filter through PROG (must accept -d)
+  -V, --label=TEXT           create archive with volume name TEXT; at
+                             list/extract time, use TEXT as a globbing pattern
+                             for volume name
+  -z, --gzip, --gunzip, --ungzip   filter the archive through gzip
+  -Z, --compress, --uncompress   filter the archive through compress
+
+ Local file selection:
+
+      --add-file=FILE        add given FILE to the archive (useful if its name
+                             starts with a dash)
+      --backup[=CONTROL]     backup before removal, choose version CONTROL
+  -C, --directory=DIR        change to directory DIR
+      --exclude=PATTERN      exclude files, given as a PATTERN
+      --exclude-caches       exclude contents of directories containing
+                             CACHEDIR.TAG, except for the tag file itself
+      --exclude-caches-all   exclude directories containing CACHEDIR.TAG
+      --exclude-caches-under exclude everything under directories containing
+                             CACHEDIR.TAG
+      --exclude-tag=FILE     exclude contents of directories containing FILE,
+                             except for FILE itself
+      --exclude-tag-all=FILE exclude directories containing FILE
+      --exclude-tag-under=FILE   exclude everything under directories
+                             containing FILE
+      --exclude-vcs          exclude version control system directories
+  -h, --dereference          follow symlinks; archive and dump the files they
+                             point to
+  -K, --starting-file=MEMBER-NAME
+                             begin at member MEMBER-NAME in the archive
+      --newer-mtime=DATE     compare date and time when data changed only
+      --no-recursion         avoid descending automatically in directories
+      --no-unquote           do not unquote filenames read with -T
+      --null                 -T reads null-terminated names, disable -C
+  -N, --newer=DATE-OR-FILE, --after-date=DATE-OR-FILE
+                             only store files newer than DATE-OR-FILE
+      --one-file-system      stay in local file system when creating archive
+  -P, --absolute-names       don't strip leading `/'s from file names
+      --recursion            recurse into directories (default)
+      --suffix=STRING        backup before removal, override usual suffix ('~'
+                             unless overridden by environment variable
+                             SIMPLE_BACKUP_SUFFIX)
+  -T, --files-from=FILE      get names to extract or create from FILE
+      --unquote              unquote filenames read with -T (default)
+  -X, --exclude-from=FILE    exclude patterns listed in FILE
+
+ File name transformations:
+
+      --strip-components=NUMBER   strip NUMBER leading components from file
+                             names on extraction
+      --transform=EXPRESSION use sed replace EXPRESSION to transform file
+                             names
+
+ File name matching options (affect both exclude and include patterns):
+
+      --anchored             patterns match file name start
+      --ignore-case          ignore case
+      --no-anchored          patterns match after any `/' (default for
+                             exclusion)
+      --no-ignore-case       case sensitive matching (default)
+      --no-wildcards         verbatim string matching
+      --no-wildcards-match-slash   wildcards do not match `/'
+      --wildcards            use wildcards (default)
+      --wildcards-match-slash   wildcards match `/' (default for exclusion)
+
+ Informative output:
+
+      --checkpoint[=[.]NUMBER]   display progress messages every NUMBERth
+                             record (default 10)
+      --index-file=FILE      send verbose output to FILE
+  -l, --check-links          print a message if not all links are dumped
+      --no-quote-chars=STRING   disable quoting for characters from STRING
+      --quote-chars=STRING   additionally quote characters from STRING
+      --quoting-style=STYLE  set name quoting style; see below for valid STYLE
+                             values
+  -R, --block-number         show block number within archive with each
+                             message
+      --show-defaults        show tar defaults
+      --show-omitted-dirs    when listing or extracting, list each directory
+                             that does not match search criteria
+      --show-transformed-names, --show-stored-names
+                             show file or archive names after transformation
+      --totals[=SIGNAL]      print total bytes after processing the archive;
+                             with an argument - print total bytes when this
+                             SIGNAL is delivered; Allowed signals are: SIGHUP,
+                             SIGQUIT, SIGINT, SIGUSR1 and SIGUSR2; the names
+                             without SIG prefix are also accepted
+      --utc                  print file modification dates in UTC
+  -v, --verbose              verbosely list files processed
+  -w, --interactive, --confirmation
+                             ask for confirmation for every action
+
+ Compatibility options:
+
+  -o                         when creating, same as --old-archive; when
+                             extracting, same as --no-same-owner
+
+ Other options:
+
+  -?, --help                 give this help list
+      --restrict             disable use of some potentially harmful options
+      --usage                give a short usage message
+      --version              print program version
+
+Mandatory or optional arguments to long options are also mandatory or optional
+for any corresponding short options.
+
+The backup suffix is `~', unless set with --suffix or SIMPLE_BACKUP_SUFFIX.
+The version control may be set with --backup or VERSION_CONTROL, values are:
+
+  none, off       never make backups
+  t, numbered     make numbered backups
+  nil, existing   numbered if numbered backups exist, simple otherwise
+  never, simple   always make simple backups
+
+Valid arguments for --quoting-style options are:
+
+  literal
+  shell
+  shell-always
+  c
+  escape
+  locale
+  clocale
+
+*This* tar defaults to:
+--format=gnu -f- -b20 --quoting-style=escape --rmt-command=/sbin/rmt
+
+Report bugs to <bug-tar@gnu.org>.
+[msiegris@rainbow asst1]$[K[msiegris@rainbow asst1]$[K[msiegris@rainbow asst1]$exit
+
+Script done on Wed 11 Feb 2009 11:56:35 PM MST

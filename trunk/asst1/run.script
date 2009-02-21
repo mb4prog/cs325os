@@ -1,0 +1,50 @@
+Script started on Wed 11 Feb 2009 06:55:21 PM MST
+[?1034h[msiegris@rainbow root]$cd cs161[K[K[K[K[K~/cs161/root/
+[msiegris@rainbow root]$sys161 kernel
+sys161: System/161 release 1.14, compiled Feb 11 2009 15:18:27
+
+OS/161 base system version 1.11
+Copyright (c) 2000, 2001, 2002, 2003
+   President and Fellows of Harvard College.  All rights reserved.
+
+Put-your-group-name-here's system version 0 (ASST1 #1)
+
+Cpu is MIPS r2000/r3000
+1872k physical memory available
+Device probe...
+lamebus0 (system main bus)
+emu0 at lamebus0
+ltrace0 at lamebus0
+ltimer0 at lamebus0
+hardclock on ltimer0 (10000 hz)
+beep0 at ltimer0
+rtclock0 at ltimer0
+lrandom0 at lamebus0
+random0 at lrandom0
+lser0 at lamebus0
+con0 at lser0
+pseudorand0 (virtual)
+
+OS/161 kernel [? for menu]: p /sbin/poweroff
+Warning: this probably won't work with a synchronization-problems kernel.
+Operation took 0.015387960 seconds
+OS/161 kernel [? for menu]: [AAAA[[BBB          p /sbin/poer   wer   oweroff <return>
+Warning: this probably won't work with a synchronization-problems kernel.
+Operation took 0.024517400 seconds
+OS/161 kernel [? for menu]: Running program è¬ failed: No such file or directory
+
+OS/161 kernel [? for menu]: [A  p/  /sbin/poweri off
+Warning: this probably won't work with a synchronization-problems kernel.
+Operation took 0.026727400 seconds
+OS/161 kernel [? for menu]: panic: Fatal exception 2 (TLB miss on load) in kernel mode
+panic: EPC 0x80013dec, exception vaddr 0xff14
+sleep: Dropping thread <boot/menu>
+scheduler: Dropping thread /sbin/poweroff.
+panic: I can't handle this... I think I'll just die now...
+sys161: 1676662055 cycles (1319271105k, 0u, 357390950i)
+sys161: 570393 irqs 1 exns 0r/0w disk 116r/1418w console 0r/0w/2m emufs 0r/0w net
+sys161: Elapsed real time: 122.076110 seconds (13.7346 mhz)
+sys161: Elapsed virtual time: 67.066482200 seconds (25 mhz)
+[msiegris@rainbow root]$exit
+
+Script done on Wed 11 Feb 2009 06:58:26 PM MST
