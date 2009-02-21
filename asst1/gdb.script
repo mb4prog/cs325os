@@ -1,0 +1,32 @@
+Script started on Wed 11 Feb 2009 07:19:27 PM MST
+[?1034h[msiegris@rainbow root]$sys161 kernelcd ~/cs161/root/
+[msiegris@rainbow root]$cs161-gdb kernel
+[?1034hGNU gdb 6.6
+Copyright (C) 2006 Free Software Foundation, Inc.
+GDB is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certain conditions.
+Type "show copying" to see the conditions.
+There is absolutely no warranty for GDB.  Type "show warranty" for details.
+This GDB was configured as "--host=i686-pc-linux-gnu --target=mips-elf"...
+(gdb) target remov[Kte unix:.sockets/gdb
+Remote debugging using unix:.sockets/gdb
+__start () at ../../arch/mips/mips/start.S:24
+24	../../arch/mips/mips/start.S: No such file or directory.
+	in ../../arch/mips/mips/start.S
+Current language:  auto; currently asm
+(gdb) break menu
+Breakpoint 1 at 0x8001c05c
+(gdb) c
+Continuing.
+
+Breakpoint 1, 0xffffffff8001c05c in menu ()
+(gdb) where
+#0  0xffffffff8001c05c in menu ()
+#1  0xffffffff8001af7c in kmain ()
+#2  0xffffffff8000d754 in __start () at ../../arch/mips/mips/start.S:163
+(gdb) detach
+Ending remote debugging.
+(gdb) quit
+[msiegris@rainbow root]$exit
+
+Script done on Wed 11 Feb 2009 07:20:46 PM MST
