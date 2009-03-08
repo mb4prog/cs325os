@@ -399,6 +399,11 @@ menu.o: ${S}/main/menu.c
 SRCS+=${S}/main/menu.c
 OBJS+=menu.o
 
+filetable.o: ${S}/userprog/filetable.c
+	${COMPILE.c} ${S}/userprog/filetable.c
+SRCS+=${S}/userprog/filetable.c
+OBJS+=filetable.o
+
 loadelf.o: ${S}/userprog/loadelf.c
 	${COMPILE.c} ${S}/userprog/loadelf.c
 SRCS+=${S}/userprog/loadelf.c

@@ -320,6 +320,10 @@ menu.o: ../../main/menu.c ../../include/types.h machine/types.h \
   ../../include/syscall.h ../../include/uio.h ../../include/vfs.h \
   ../../include/sfs.h ../../include/vnode.h ../../include/fs.h \
   ../../include/kern/sfs.h ../../include/test.h opt-sfs.h opt-net.h
+filetable.o: ../../userprog/filetable.c ../../include/types.h \
+  machine/types.h ../../include/kern/types.h machine/ktypes.h \
+  ../../include/lib.h machine/setjmp.h ../../include/array.h \
+  ../../include/filetable.h
 loadelf.o: ../../userprog/loadelf.c ../../include/types.h machine/types.h \
   ../../include/kern/types.h machine/ktypes.h ../../include/kern/errno.h \
   ../../include/lib.h machine/setjmp.h ../../include/uio.h \
