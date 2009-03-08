@@ -379,6 +379,7 @@ file      main/menu.c
 # calls assignment)
 #
 
+file      userprog/filetable.c
 file      userprog/loadelf.c
 file      userprog/runprogram.c
 file      userprog/uio.c
