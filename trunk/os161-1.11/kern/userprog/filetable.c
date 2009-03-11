@@ -17,8 +17,8 @@ filetable* filetable_create()
 	filetable* ft;		// File table created.
 	struct vnode* v;	// Used to attach to console and keyboard.
 	filedesc** fd;		// Used to initialize STDIN etc.
-	char name[16];				// Name for attaching handles.
-	int result;					// Result of opening console handles.
+	char name[16];		// Name for attaching handles.
+	int result;			// Result of opening console handles.
 
 	// Create a new filetable.
 	ft = kmalloc(sizeof(filetable));
@@ -55,6 +55,7 @@ filetable* filetable_create()
 	}
 	fd[0]->vn = v;
 	fd[0]->offset = 0;
+	fd[0]->mode = O_WRONLY;
 	filetable_add(ft, (void*) fd[0]);
 
 	// STDOUT
@@ -69,6 +70,7 @@ filetable* filetable_create()
 	}
 	fd[1]->vn = v;
 	fd[1]->offset = 0;
+	fd[0]->mode = O_RDONLY;
 	filetable_add(ft, (void*) fd[1]);
 
 	// STDERR
@@ -83,6 +85,7 @@ filetable* filetable_create()
 	}
 	fd[2]->vn = v;
 	fd[2]->offset = 0;
+	fd[0]->mode = O_WRONLY;
 	filetable_add(ft, (void*) fd[2]);
 
 	return(ft);
@@ -90,9 +93,9 @@ filetable* filetable_create()
 
 filetable* filetable_copy(filetable* ft)
 {
-	filetable* copy;		// Copy of ft returned.
-	int size;					// Number of handles in ft.
-	int i;						// Index into handles of ft.
+	filetable* copy;	// Copy of ft returned.
+	int size;			// Number of handles in ft.
+	int i;				// Index into handles of ft.
 
 	// Create a new filetable to return.
 	assert(ft);
@@ -125,6 +128,10 @@ int filetable_size(filetable* ft)
 filedesc* filetable_get(filetable* ft, int i)
 {
 	assert(ft);
+	
+	// Return NULL if the index is invalid.
+	// This prevents the assert in array_getguy from failing.
+	if(i >= filetable_size(ft)) return(NULL);
 	return((filedesc*) array_getguy(ft->handles, i));
 }
 
@@ -139,7 +146,7 @@ void filetable_set(filetable* ft, int i, filedesc* val)
 	{
 		ft->next = i;
 	}
-	return(array_setguy(ft->handles, i, (void*) val));
+	array_setguy(ft->handles, i, (void*) val);
 }
 
 int filetable_add(filetable* ft, filedesc* val)
@@ -155,20 +162,22 @@ int filetable_add(filetable* ft, filedesc* val)
 	if(ft->next < filetable_size(ft))
 	{
 		filetable_set(ft, ft->next, val);
+		ret = ft->next;
 
 		// Determine the next value for next.
 		size = filetable_size(ft);
 		for(i = ft->next; i < size && filetable_get(ft, i); i++);
 		ft->next = i;
-		ret = 0;
 	}
 	else
 	{
 		// Add to the end of the list.
-		ret = array_add(ft->handles, (void*) val);
+		if(!array_add(ft->handles, (void*) val)) return(-1);
+		ret = ft->next;
 		ft->next = filetable_size(ft);
 	}
 
+	// Return the index of the added value.
 	return(ret);
 }
 
@@ -184,20 +193,26 @@ int filetable_remove(filetable* ft, int i)
 	fd = filetable_get(ft, i);
 	if(fd)
 	{
-		VOP_CLOSE(fd->vn);
+		// vfs_close() can't fail.
+		vfs_close(fd->vn);
 		kfree(fd);
 		filetable_set(ft, i, NULL);
-	}
 	
-	// Only remove the item from the array if it is at the tail.
-	if(i == filetable_size(ft) - 1)
-	{
-		array_remove(ft->handles, i);
-		ret = 1;
+		// Only remove the item from the array if it is at the tail.
+		if(i == filetable_size(ft) - 1)
+		{
+			array_remove(ft->handles, i);
+			ret = 1;
+		}
+		else
+		{
+			ret = 0;
+		}
 	}
 	else
 	{
-		ret = 0;
+		// Invalid index, return error.
+		ret = -1;
 	}
 	
 	return(ret);
