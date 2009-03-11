@@ -14,6 +14,7 @@
 #define _FILETABLE_H_
 
 #include "array.h"
+#include "synch.h"
 #include "types.h"
 #include "vnode.h"
 
@@ -21,10 +22,17 @@
 /*
  * Structures for the filetables.
  */
+
+typedef size_t mode_t;		// Modes that the file descriptors can have.
+
 typedef struct
 {
 	struct vnode* vn;		// Node being referenced.
-	unsigned int offset;		// Offset within node.
+	unsigned int offset;	// Offset within node.
+	mode_t mode;			// Mode for the file descriptor.
+	//struct lock* lock;	// Lock for controlling access to the file.
+							//      Lock code isn't written yet,
+							//      so we'll just have to disable interrupts until then.
 } filedesc;
 
 typedef struct
@@ -32,6 +40,8 @@ typedef struct
 	struct array* handles;	// List of all handles controlled by the filetable.
 	int next;				// The next index to add handles at.
 } filetable;
+
+
 
 /*
  * Filetable functions.

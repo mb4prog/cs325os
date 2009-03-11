@@ -7,7 +7,6 @@
 #include <kern/callno.h>
 #include <syscall.h>
 
-
 /*
  * System call handler.
  *
@@ -69,15 +68,30 @@ mips_syscall(struct trapframe *tf)
 
 	switch (callno) {
 	    case SYS_reboot:
-		err = sys_reboot(tf->tf_a0);
-		break;
+			err = sys_reboot(tf->tf_a0);
+			break;
 
 	    /* Add stuff here */
- 
+		case SYS_open:
+			// Send retval to get the index on success.
+			err = sys_open((char*) tf->tf_a0, tf->tf_a1, tf->tf_a2, &retval);
+			break;
+		case SYS_read:
+			// Send retval to get the number of bytes read.
+			err = sys_read(tf->tf_a0, (void*) tf->tf_a1, tf->tf_a2, &retval);
+			break;
+		case SYS_write:
+			// Send retval to get the number of bytes written.
+			err = sys_write(tf->tf_a0, (void*) tf->tf_a1, tf->tf_a2, &retval);
+			break;
+		case SYS_close:
+			err = sys_close(tf->tf_a0);
+			break;
+
 	    default:
-		kprintf("Unknown syscall %d\n", callno);
-		err = ENOSYS;
-		break;
+			kprintf("Unknown syscall %d\n", callno);
+			err = ENOSYS;
+			break;
 	}
 
 

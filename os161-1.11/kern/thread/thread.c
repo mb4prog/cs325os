@@ -13,6 +13,7 @@
 #include <addrspace.h>
 #include <vnode.h>
 #include "opt-synchprobs.h"
+#include <filetable.h>
 
 /* States a thread can be in. */
 typedef enum {
@@ -61,6 +62,9 @@ thread_create(const char *name)
 	
 	// If you add things to the thread structure, be sure to initialize
 	// them here.
+
+	// Initialize the thread's filetable.
+	thread->ft = filetable_create();
 	
 	return thread;
 }
@@ -79,6 +83,9 @@ thread_destroy(struct thread *thread)
 
 	// If you add things to the thread structure, be sure to dispose of
 	// them here or in thread_exit.
+
+	// Destroy the thread's filetable.
+	filetable_destroy(thread->ft);
 
 	// These things are cleaned up in thread_exit.
 	assert(thread->t_vmspace==NULL);

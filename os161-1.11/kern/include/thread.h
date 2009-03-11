@@ -8,6 +8,7 @@
 /* Get machine-dependent stuff */
 #include <machine/pcb.h>
 
+#include <filetable.h>
 
 struct addrspace;
 
@@ -37,6 +38,11 @@ struct thread {
 	 * and is manipulated by the virtual filesystem (VFS) code.
 	 */
 	struct vnode *t_cwd;
+
+	/*
+	 * Added by Michael Siegrist.
+	 */
+	filetable* ft;
 };
 
 /* Call once during startup to allocate data structures. */
