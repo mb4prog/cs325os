@@ -15,10 +15,7 @@
 filetable* filetable_create()
 {
 	filetable* ft;		// File table created.
-	struct vnode* v;	// Used to attach to console and keyboard.
-	filedesc** fd;		// Used to initialize STDIN etc.
-	char name[16];		// Name for attaching handles.
-	int result;			// Result of opening console handles.
+
 
 	// Create a new filetable.
 	ft = kmalloc(sizeof(filetable));
@@ -35,12 +32,25 @@ filetable* filetable_create()
 		return(NULL);
 	}
 
+	return(ft);
+}
+
+int filetable_init(filetable* ft)
+{
+	struct vnode* v;	// Used to attach to console and keyboard.
+	filedesc** fd;		// Used to initialize STDIN etc.
+	char name[16];		// Name for attaching handles.
+	int result;			// Result of opening console handles.
+
+
+	assert(ft);
+
 	// Initialize the handles to STDIN, STDOUT, and STDERR.
 	fd = kmalloc(sizeof(struct filedesc*) * 3);
 	if(fd == NULL)
 	{
 		filetable_destroy(ft);
-		return(NULL);
+		return(1);
 	}
 
 	// STDIN
@@ -51,7 +61,7 @@ filetable* filetable_create()
 		kprintf("Unable to attach to stdin: %s\n", strerror(result));
 		vfs_close(v);
 		filetable_destroy(ft);
-		return(NULL);
+		return(1);
 	}
 	fd[0]->vn = v;
 	fd[0]->offset = 0;
@@ -66,7 +76,7 @@ filetable* filetable_create()
 		kprintf("Unable to attach to stdout: %s\n", strerror(result));
 		vfs_close(v);
 		filetable_destroy(ft);
-		return(NULL);
+		return(1);
 	}
 	fd[1]->vn = v;
 	fd[1]->offset = 0;
@@ -81,14 +91,14 @@ filetable* filetable_create()
 		kprintf("Unable to attach to stderr: %s\n", strerror(result));
 		vfs_close(v);
 		filetable_destroy(ft);
-		return(NULL);
+		return(1);
 	}
 	fd[2]->vn = v;
 	fd[2]->offset = 0;
 	fd[0]->mode = O_WRONLY;
 	filetable_add(ft, (void*) fd[2]);
 
-	return(ft);
+	return(0);
 }
 
 filetable* filetable_copy(filetable* ft)
@@ -96,6 +106,7 @@ filetable* filetable_copy(filetable* ft)
 	filetable* copy;	// Copy of ft returned.
 	int size;			// Number of handles in ft.
 	int i;				// Index into handles of ft.
+
 
 	// Create a new filetable to return.
 	assert(ft);
@@ -155,6 +166,7 @@ int filetable_add(filetable* ft, filedesc* val)
 	int ret;
 	int size;
 
+
 	assert(ft);
 	assert(val);
 
@@ -172,7 +184,7 @@ int filetable_add(filetable* ft, filedesc* val)
 	else
 	{
 		// Add to the end of the list.
-		if(!array_add(ft->handles, (void*) val)) return(-1);
+		if(array_add(ft->handles, (void*) val)) return(-1);
 		ret = ft->next;
 		ft->next = filetable_size(ft);
 	}
@@ -185,6 +197,7 @@ int filetable_remove(filetable* ft, int i)
 {
 	int ret;
 	filedesc* fd;
+
 
 	assert(ft);
 	assert(i >= 0 && i < filetable_size(ft));
@@ -222,6 +235,7 @@ void filetable_destroy(filetable* ft)
 {
 	int i;
 	int size;
+
 
 	assert(ft);
 
