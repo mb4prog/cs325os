@@ -1,0 +1,78 @@
+CS 325 Lab 2
+Bradley Brown, Justin Kenworthy, Michael Siegrist
+Project Documentation
+
+
+FILES ADDED/MODIFIED
+------------------------------------------------------------------------------
+Added       /kern/include/file.h
+Added       /kern/include/filetable.h
+Modified    /kern/include/syscall.h
+Modified    /kern/include/thread.h
+Modified    /kern/thread/thread.c
+Added       /kern/userprog/file.c
+Added       /kern/userprog/filetable.c
+Modified    /kern/arch/mips/mips/syscall.c
+
+
+1. MANAGING PER-PROCESS FILE SYSTEM STATE
+------------------------------------------------------------------------------
+
+File Descriptors and File Tables:
+    The filetable and filedesc structures, defined and implemented within
+    filetable.h and filetable.c, are used to control access to files on a per-
+    process basis.  The thread structure is modified to contain a file table
+    for each thread, which will contain a list of all of the file descriptors
+    used by the thread.  The file descriptors contain a handle to the file
+    being referenced (vnode), the offset within the file, and the open mode
+    of the file.  To preserve the possible list of handles, the file table
+    replaces closed handles within the list with NULL values, allowing the
+    other handle indices to remain correct.  Then, when a new handle is
+    created with a function like open(), the file table places the new handle
+    at the index of the first  NULL entry found, or at the end if no NULL
+    index exists.
+
+    It is important to note that the file table does not automatically
+    contain references to STDIN, STDOUT, or STDERR.  This is because system
+    threads also contain file tables, but since they can not all have
+    references to the console (especially during the bootstrapping phase),
+    there is a separate funciton call for adding those handles.  However, the
+    user-level processes are all initialized with such handles.  Another
+    important feature is that, since copies of a file table have references to
+    the same handles, a write to a file from one file table will be visible in
+    the other, though the offset and other attributes remain independent.
+
+open():
+    Since the system call must be able to return both error values and return
+    values, the system call has an extra input parameter, ret, which is used
+    to return the index of the handle of the opened file within the calling
+    thread's filetable.  The system call then returns 0 on success, or an
+    error value as needed.  Error codes and other values returned for this
+    and other file-related system calls conform to those specified in the man
+    page for the system call.
+
+read():
+    Read also has a special parameter for passing back the return value on
+    success.  After determining the existence of the file to be read, the
+    function turns off all interrupts to allow the read to operate completely
+    atomically.  The read also handles modifying the offset of the file
+    descriptor according to the number of bytes read.  The total number of
+    bytes read is returned in ret, with the error value returned by the
+    function, or 0 on success.
+
+write():
+    Again, write has an added parameter for returning the number of bytes
+    written by this function.  The functionality of write is esentially the
+    same as that for read except that it writes data to the file rather than
+    reading from it.  Again, this is an atomic operation.
+
+close():
+    The majority of this function is handled by the file table.  Provided that
+    a handle exists at the given index, that handle is closed and the file
+    descriptor released.  However, it is important to note that, unlike other
+    system calls on files, close does not return all specified errors.
+    Specifically, it does not return EIO.  This is becuase there does not seem
+    to be a documented way for the system to be able to fail on a close of a
+    vnode without generating an error in a different part of the system, and
+    all other errors fall under EBADF.
+
