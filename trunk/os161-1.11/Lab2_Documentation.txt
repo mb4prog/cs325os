@@ -271,4 +271,21 @@ Overview:
     lower levels.  All threads at the lowest level end up being scheduled in a
     round robin fashion.
 
+Issues:
+    A normal system would contain some mechanism for allowing threads to
+    decide their own priority, but due to time constraints, we were unable to
+    implement such a feature.  There is also currently no way for system
+    threads to schedule themselves in a different way than user threads,
+    meaning that they will eventually end up at the lowest priority level as
+    well, which can be detrimental to the system.
 
+Implementation:
+    The implementation is largely based off of the existing round robin
+    functionality.  The biggest differences are that there is an array of
+    queues rather than a single one, and the scheduler chooses the first non-
+    empty one for selecting threads, lowering the thread priority each time.
+
+Alternatives:
+    We had also discussed using different time slices for queues of different
+    priorities, but unfortunately we were unable to include this functionality
+    by the submission deadline.
