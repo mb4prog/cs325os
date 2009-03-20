@@ -76,3 +76,8 @@ close():
     vnode without generating an error in a different part of the system, and
     all other errors fall under EBADF.
 
+lseek():
+    This function moves the offset parameter in the vnode structure (which essentially serves as an indicator of the current location in the open file) based on given input.  The function can use the end of the file or the current positon as a   	base point for performing the seek operation, or it can simply move to a specified point.  This is based on which flag is passed to the function.  In order to figure out the position of the EOF (in case it is selected as the base point for the lseek), the function obtains the current blocksize and number of blocks in the file (as defined in the vnode) and performs a multiplication operation; this should return the current size -- and EOF value -- of the file.  The function relies on VOP_TRYSEEK to determine whether or not the seek parameter (after accounting for the specified base) is valid; it assumes that if VOP_TRYSEEK returns no errors, the value can be changed with no problems.
+
+dub2():
+    This function simply obtains the handle from the filetable corresponding to a given fd value (passed in as oldfd), copies its parameters into a new handle structure, adds this new structure to the filetable, and returns the new entry's fd value.  In other words, it obtains a stored file handle, copies it, and places the copy in the table.  The function does also check if any file handles already exist for the given newfd value, and closes them if they do. 
