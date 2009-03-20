@@ -7,6 +7,7 @@
 #include <kern/callno.h>
 #include <syscall.h>
 #include <curthread.h>
+#include <thread.h>
 
 /*
  * System call handler.
@@ -69,12 +70,15 @@ mips_syscall(struct trapframe *tf)
 
 	switch (callno) {
 	    case SYS_reboot:
-			err = sys_reboot(tf->tf_a0);
-			break;
+		err = sys_reboot(tf->tf_a0);
+		break;
 
 	    /* Add stuff here */
 	    case SYS_fork:
+		//kprintf("Trapped system call fork()\n");
 	    	retval = sys_fork(tf);
+		err = 0;
+		//kprintf("Returning from system call fork() with return value %d\n", retval);
 		break;
 
 	    case SYS__exit:
@@ -107,9 +111,9 @@ mips_syscall(struct trapframe *tf)
 			break;
 
 	    default:
-			kprintf("Unknown syscall %d\n", callno);
-			err = ENOSYS;
-			break;
+		kprintf("Unknown syscall %d\n", callno);
+		err = ENOSYS;
+		break;
 	}
 
 
@@ -147,19 +151,25 @@ void md_forkentry(void *data1, unsigned long data2)
 	 *
 	 * Thus, you can trash it and do things another way if you prefer.
 	 */
-
-	struct trapframe tf = *((struct trapframe*)data1);
+	 
+	int s;
+	s = splhigh();
+      
+	struct trapframe tf;
+	memcpy(&tf,(struct trapframe*)data1,sizeof(struct trapframe));
 	kfree(data1);
 
 	/* Set the return value to 0 for the child process
 	   and advance the program counter to avoid restarting the syscall */
 	tf.tf_v0 = 0;
 	tf.tf_epc += 4;
+	tf.tf_a3 = 0;
+		
+	splx(s);
 	mips_usermode(&tf);
-	kprintf("Returning to childproc\n");
 }
+
 int sys__exit(int exitcode) {
-	kprintf("got _exit syscall from proc: %d\n", *(curthread->id));
 	thread_exit();
 	return 0;
 }
@@ -169,9 +179,9 @@ int sys_getpid() {
 }
 
 int sys_fork(struct trapframe *tf) {
-	struct thread **child_thread = NULL;
+	struct thread *child_thread = NULL;
 	//Make a copy of the parent's trap frame on the kernel heap
-	struct rapframe *tf_copy = kmalloc(sizeof(struct trapframe));
+	struct trapframe *tf_copy = kmalloc(sizeof(struct trapframe));
 
 	if (tf_copy == NULL) {
 		//handle the kmalloc error here
@@ -179,8 +189,13 @@ int sys_fork(struct trapframe *tf) {
 		return ENOMEM;
 	}
 
+	int s;
+	s = splhigh();
 	memcpy(tf_copy,tf,sizeof(struct trapframe));
-	thread_fork("childproc", tf_copy, 0, md_forkentry, child_thread);
-	//filetable_init((*child_thread)->ft);
-	return *((*child_thread)->id);
+	splx(s);
+	
+	thread_fork(curthread->t_name, (void*)tf_copy, 0, md_forkentry, &child_thread);
+
+	//Return the child's process id
+	return *(child_thread->id);
 }
