@@ -8,8 +8,10 @@ FILES ADDED/MODIFIED
 
 Added       /kern/include/file.h
 Added       /kern/include/filetable.h
+Modified    /kern/include/scheduler.c
 Modified    /kern/include/syscall.h
 Modified    /kern/include/thread.h
+Modified    /kern/thread/scheduler.c
 Modified    /kern/thread/thread.c
 Added       /kern/userprog/file.c
 Added       /kern/userprog/filetable.c
@@ -284,6 +286,9 @@ Implementation:
     functionality.  The biggest differences are that there is an array of
     queues rather than a single one, and the scheduler chooses the first non-
     empty one for selecting threads, lowering the thread priority each time.
+    To use the priority scheduler rather than the default round robin
+    scheduler, PRIORITY_SCHEDULER must be define in scheduler.h (defined by
+    default).
 
 Alternatives:
     We had also discussed using different time slices for queues of different
