@@ -9,6 +9,7 @@
 #include <machine/pcb.h>
 
 #include <filetable.h>
+#include <scheduler.h>
 
 struct addrspace;
 
@@ -40,11 +41,20 @@ struct thread {
 	struct vnode *t_cwd;
 
 	/*
-	 * Added by Michael Siegrist.
+	 * Filetable for this thread.
 	 */
 	filetable* ft;
 
-/*  Assigned, unique process id */
+#ifdef PRIORITY_SCHEDULER
+	/*
+	 * Priority used by the priority scheduler.
+	 */
+	int priority;
+#endif
+
+	/* 
+	 * Assigned, unique process id
+	 */
 	int *id;
 };
 
