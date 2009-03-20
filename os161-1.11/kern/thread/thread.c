@@ -5,6 +5,7 @@
 #include <lib.h>
 #include <kern/errno.h>
 #include <array.h>
+#include <queue.h>
 #include <machine/spl.h>
 #include <machine/pcb.h>
 #include <thread.h>
@@ -14,6 +15,7 @@
 #include <vnode.h>
 #include "opt-synchprobs.h"
 #include <filetable.h>
+#define MAX_THREADS 100
 
 /* States a thread can be in. */
 typedef enum {
@@ -31,6 +33,9 @@ static struct array *sleepers;
 
 /* List of dead threads to be disposed of. */
 static struct array *zombies;
+
+/* List of available process ids */
+static struct queue *process_ids;
 
 /* Total number of outstanding threads. Does not count zombies[]. */
 static int numthreads;
@@ -62,6 +67,8 @@ thread_create(const char *name)
 	
 	// If you add things to the thread structure, be sure to initialize
 	// them here.
+thread->id = (int*)q_remhead(process_ids);
+kprintf("Created thread with procID: %d\n", *(thread->id));
 
 	// Initialize the thread's filetable.
 	thread->ft = filetable_create();
@@ -83,6 +90,8 @@ thread_destroy(struct thread *thread)
 
 	// If you add things to the thread structure, be sure to dispose of
 	// them here or in thread_exit.
+	q_addtail(process_ids, (void*)thread->id);
+	kprintf("reclaimed procID: %d\n", *(thread->id));
 
 	// Destroy the thread's filetable.
 	filetable_destroy(thread->ft);
@@ -189,6 +198,25 @@ thread_bootstrap(void)
 		panic("Cannot create zombies array\n");
 	}
 	
+	process_ids = q_create(MAX_THREADS);
+	if (process_ids == NULL) {
+		panic("Cannot create process ids queue\n");
+	}
+	int i;
+	int err;
+	for (i = 0;i < MAX_THREADS;i++) {
+		int *proc_id = (int*)kmalloc(sizeof(int));
+		if (proc_id == NULL) {
+			panic("Unable to allocate process id's\n");
+		}
+		*proc_id = i;
+		
+		err = q_addtail(process_ids, proc_id);
+		if (err) {
+			panic("Unable to add process id\n");
+		}
+	}
+	kprintf("Created process ID list\n");
 	/*
 	 * Create the thread structure for the first thread
 	 * (the one that's already running)
@@ -226,6 +254,8 @@ thread_shutdown(void)
 	sleepers = NULL;
 	array_destroy(zombies);
 	zombies = NULL;
+	q_destroy(process_ids);
+	process_ids = NULL;
 	// Don't do this - it frees our stack and we blow up
 	//thread_destroy(curthread);
 }
@@ -256,6 +286,10 @@ thread_fork(const char *name,
 		kfree(newguy->t_name);
 		kfree(newguy);
 		return ENOMEM;
+	}
+
+	if (curthread->t_vmspace != NULL) {
+		as_copy(curthread->t_vmspace,&newguy->t_vmspace);
 	}
 
 	/* stick a magic number on the bottom end of the stack */

@@ -72,6 +72,6 @@ struct trapframe {
  * happen.
  */
 void mips_usermode(struct trapframe *tf);
-void md_forkentry(struct trapframe *tf);
+void md_forkentry(void *data1, unsigned long data2);
 
 #endif /* _MIPS_TRAPFRAME_H_ */

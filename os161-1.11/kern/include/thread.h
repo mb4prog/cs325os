@@ -43,6 +43,9 @@ struct thread {
 	 * Added by Michael Siegrist.
 	 */
 	filetable* ft;
+
+/*  Assigned, unique process id */
+	int *id;
 };
 
 /* Call once during startup to allocate data structures. */
