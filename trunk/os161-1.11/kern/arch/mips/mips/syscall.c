@@ -6,6 +6,7 @@
 #include <machine/trapframe.h>
 #include <kern/callno.h>
 #include <syscall.h>
+#include <curthread.h>
 
 /*
  * System call handler.
@@ -72,6 +73,17 @@ mips_syscall(struct trapframe *tf)
 			break;
 
 	    /* Add stuff here */
+	    case SYS_fork:
+	    	retval = sys_fork(tf);
+		break;
+
+	    case SYS__exit:
+	      err = sys__exit(tf->tf_a0);
+	      break;
+	      
+	    case SYS_getpid:
+	      retval = sys_getpid();
+	      break;
 		case SYS_open:
 			// Send retval to get the index on success.
 			err = sys_open((char*) tf->tf_a0, tf->tf_a1, tf->tf_a2, &retval);
@@ -86,6 +98,12 @@ mips_syscall(struct trapframe *tf)
 			break;
 		case SYS_close:
 			err = sys_close(tf->tf_a0);
+			break;
+		case SYS_dup2:
+			err = sys_dup2(tf->tf_a0, tf->tf_a1);
+			break;
+		case SYS_lseek:
+			err = sys_lseek(tf->tf_a0, tf->tf_a1, tf->tf_a2);
 			break;
 
 	    default:
@@ -121,8 +139,7 @@ mips_syscall(struct trapframe *tf)
 	assert(curspl==0);
 }
 
-void
-md_forkentry(struct trapframe *tf)
+void md_forkentry(void *data1, unsigned long data2)
 {
 	/*
 	 * This function is provided as a reminder. You need to write
@@ -131,5 +148,39 @@ md_forkentry(struct trapframe *tf)
 	 * Thus, you can trash it and do things another way if you prefer.
 	 */
 
-	(void)tf;
+	struct trapframe tf = *((struct trapframe*)data1);
+	kfree(data1);
+
+	/* Set the return value to 0 for the child process
+	   and advance the program counter to avoid restarting the syscall */
+	tf.tf_v0 = 0;
+	tf.tf_epc += 4;
+	mips_usermode(&tf);
+	kprintf("Returning to childproc\n");
+}
+int sys__exit(int exitcode) {
+	kprintf("got _exit syscall from proc: %d\n", *(curthread->id));
+	thread_exit();
+	return 0;
+}
+
+int sys_getpid() {
+	return *(curthread->id);
+}
+
+int sys_fork(struct trapframe *tf) {
+	struct thread **child_thread = NULL;
+	//Make a copy of the parent's trap frame on the kernel heap
+	struct rapframe *tf_copy = kmalloc(sizeof(struct trapframe));
+
+	if (tf_copy == NULL) {
+		//handle the kmalloc error here
+		kfree(tf_copy);
+		return ENOMEM;
+	}
+
+	memcpy(tf_copy,tf,sizeof(struct trapframe));
+	thread_fork("childproc", tf_copy, 0, md_forkentry, child_thread);
+	//filetable_init((*child_thread)->ft);
+	return *((*child_thread)->id);
 }

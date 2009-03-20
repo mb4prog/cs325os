@@ -12,6 +12,7 @@
 #include <thread.h>
 #include <uio.h>
 #include <vfs.h>
+#include <dev.h>
 
 
 int sys_open(char *path, int  oflag, mode_t mode, int* ret)
@@ -153,4 +154,71 @@ int sys_close(int fd)
 	 */
 
 	return(0);
+}
+
+int sys_dup2(int oldfd, int newfd)
+{
+	filedesc* file_d_old;
+	filedesc* file_d_check;
+	filedesc* file_d_new; //file descriptors
+
+	//see if file_d_old does not exist, or if newfd is a negative value
+	file_d_old = filetable_get(curthread->ft, oldfd);
+	if (file_d_old == NULL || newfd < 0) 
+		return (EBADF);
+
+	//if the filetable is full, this should return an EMFILE error
+	//however, I don't know if the table CAN be completely full
+	//see if filetable_size is just current size or maximum size
+
+	//if newfd is an open file descriptor, close the file
+	file_d_check = filetable_get(curthread->ft, newfd);
+	if (file_d_check != NULL) 
+		sys_close(newfd);
+
+	//copy the values from the old handle into the new
+	file_d_new->vn = file_d_old->vn;
+	file_d_new->offset = file_d_old->offset;
+	file_d_new->mode = file_d_old->mode;
+
+	//put the new handle and file descriptor into the file table
+	filetable_set(curthread->ft, newfd, file_d_new);
+	return(newfd);
+}
+
+int sys_lseek(int fd, off_t pos, int whence)
+{
+	filedesc* file_d;
+	int tryseek_error;
+	struct device *d;
+	//retrieve file handle specified by fd
+	file_d = filetable_get(curthread->ft, fd);
+	if(file_d == NULL) return(EBADF);http://mail.google.com/mail/?shva=1#inbox
+
+	//get information about the vnode in order to obtain the size of the file
+	d = file_d->vn->vn_data;
+	//switch statement based on whence
+	switch (whence)
+	{
+	case SEEK_SET://new position is pos
+		break;
+	case SEEK_CUR://new position is current+pos
+		pos += file_d->offset;
+		break;
+	case SEEK_END://new position is EOF + pos 
+		pos += (d->d_blocksize + d->d_blocks);
+		break;
+	default: return(EINVAL);
+	}
+
+	//see if seeking to the given position is legal
+	tryseek_error = VOP_TRYSEEK(file_d->vn, pos);
+	if (tryseek_error != 0) return(tryseek_error);
+
+	//the actual seek
+	//in theory, set file_d->offset to pos
+	//may need to do special work for pos > EOF case; make sure
+	file_d->offset = pos;
+
+	return(pos);	
 }
