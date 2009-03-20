@@ -67,8 +67,8 @@ thread_create(const char *name)
 	
 	// If you add things to the thread structure, be sure to initialize
 	// them here.
-thread->id = (int*)q_remhead(process_ids);
-kprintf("Created thread with procID: %d\n", *(thread->id));
+	thread->id = (int*)q_remhead(process_ids);
+	//kprintf("Created process with proc id: %d\n", *(thread->id));
 
 	// Initialize the thread's filetable.
 	thread->ft = filetable_create();
@@ -91,7 +91,8 @@ thread_destroy(struct thread *thread)
 	// If you add things to the thread structure, be sure to dispose of
 	// them here or in thread_exit.
 	q_addtail(process_ids, (void*)thread->id);
-	kprintf("reclaimed procID: %d\n", *(thread->id));
+	thread->id = NULL;
+	//kprintf("Reclaimed proc id: %d\n", *(thread->id));
 
 	// Destroy the thread's filetable.
 	filetable_destroy(thread->ft);
@@ -211,12 +212,13 @@ thread_bootstrap(void)
 		}
 		*proc_id = i;
 		
-		err = q_addtail(process_ids, proc_id);
+		err = q_addtail(process_ids, (void*)proc_id);
 		if (err) {
 			panic("Unable to add process id\n");
 		}
 	}
-	kprintf("Created process ID list\n");
+	kprintf("Created process id list");
+	
 	/*
 	 * Create the thread structure for the first thread
 	 * (the one that's already running)
@@ -289,9 +291,10 @@ thread_fork(const char *name,
 	}
 
 	if (curthread->t_vmspace != NULL) {
-		as_copy(curthread->t_vmspace,&newguy->t_vmspace);
+		int err = 0;
+		err = as_copy(curthread->t_vmspace,&(newguy->t_vmspace));
 	}
-
+	
 	/* stick a magic number on the bottom end of the stack */
 	newguy->t_stack[0] = 0xae;
 	newguy->t_stack[1] = 0x11;
@@ -356,6 +359,7 @@ thread_fork(const char *name,
 		*ret = newguy;
 	}
 
+	//kprintf("thread_fork(): Returning cleanly\n");
 	return 0;
 
  fail:

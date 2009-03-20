@@ -77,7 +77,179 @@ close():
     all other errors fall under EBADF.
 
 lseek():
-    This function moves the offset parameter in the vnode structure (which essentially serves as an indicator of the current location in the open file) based on given input.  The function can use the end of the file or the current positon as a   	base point for performing the seek operation, or it can simply move to a specified point.  This is based on which flag is passed to the function.  In order to figure out the position of the EOF (in case it is selected as the base point for the lseek), the function obtains the current blocksize and number of blocks in the file (as defined in the vnode) and performs a multiplication operation; this should return the current size -- and EOF value -- of the file.  The function relies on VOP_TRYSEEK to determine whether or not the seek parameter (after accounting for the specified base) is valid; it assumes that if VOP_TRYSEEK returns no errors, the value can be changed with no problems.
+    This function moves the offset parameter in the vnode structure (which 
+essentially serves as an indicator of the current location in the open file) 
+based on given input.  The function can use the end of the file or the current 
+positon as a base point for performing the seek operation, or it can simply 
+move to a specified point.  This is based on which flag is passed to the 
+function.  In order to figure out the position of the EOF (in case it is 
+selected as the base point for the lseek), the function obtains the current 
+blocksize and number of blocks in the file (as defined in the vnode) and 
+performs a multiplication operation; this should return the current size -- 
+and EOF value -- of the file.  The function relies on VOP_TRYSEEK to determine 
+whether or not the seek parameter (after accounting for the specified base) is 
+valid; it assumes that if VOP_TRYSEEK returns no errors, the value can be changed 
+with no problems.
 
 dub2():
-    This function simply obtains the handle from the filetable corresponding to a given fd value (passed in as oldfd), copies its parameters into a new handle structure, adds this new structure to the filetable, and returns the new entry's fd value.  In other words, it obtains a stored file handle, copies it, and places the copy in the table.  The function does also check if any file handles already exist for the given newfd value, and closes them if they do. 
+    This function simply obtains the handle from the filetable corresponding 
+to a given fd value (passed in as oldfd), copies its parameters into a new handle 
+structure, adds this new structure to the filetable, and returns the new entry's 
+fd value.  In other words, it obtains a stored file handle, copies it, and places 
+the copy in the table.  The function does also check if any file handles already 
+exist for the given newfd value, and closes them if they do. 
+
+fork():
+Overview:
+For the system call fork(), the biggest issues are those with timing.  For 
+several different parts of the forking process, timing is very important
+and determines whether or not a process is able to fork properly.  First,
+a forked child must be an exact copy of it's parent, except for the
+return value.  Therefore, the moment after the user-level program makes
+the system call for fork(), the OS must copy the trapframe supplied by the
+interrupt handler.  This trapframe is placed on the kernel heap and set to be
+passed in to an entry-point function later when the child begins execution.  
+Next, the calling thread must be forked at the kernel level.  This is 
+accomplished by spawning a new thread, copying the address space of the parent
+and its stack then setting it to runnable.  At this point the OS must assign a 
+process ID number to the newly spawned child process.  The ID number must be 
+unique.
+
+The way we assign unique identifiers to the processes is by generating a queue of
+available process id's that are not currently in use.  This structure is
+generated when the thread management system bootstraps.  It generates 100 process
+id numbers and places them in a queue.  When a new thread is created, we pop a 
+number off of this queue and assign it to the thread.  When a thread is destroyed,
+we push its process ID number back onto the process id queue so that is can be
+reclaimed and used again for other processes.  This means that at one time, no more
+than 100 processes can be running on the operating system.  However, the number of
+runnable processes is defined by a macro in the thread management system.  We only
+reclaim process ID numbers when a thread is actually removed from the thread
+management system.  This ensures that any processes which previously expressed 
+interest in the status of another process can be informed of the death of that
+process.  It also ensures that a number will not be re-used until it is completely
+removed from the system.
+
+Implementation:
+The implementation of the fork process begins with a call to sys_fork() whose only
+parameter is the trap frame supplied by the trap handler.  The joob of sys_fork() 
+is to copy the trapframe into kernel memory, for the current thread, and then return
+the child's process id to the parent.  sys_fork() calls on thread_fork() to do most
+of the work of forking, but this function has been modified as well.  It is setup
+to copy the address space, using as_copy(), of the parent into the address space of
+the child, if they exist.  This ensures the child will have an exact copy of the
+parent's address space while still maintaining its own space.  The thread structure
+was modified to contain a pointer to its thread id which is simply and integer.
+
+One of the parameters passed to the thread_fork() function is the entry point to 
+begin execution of the child process.  This function is called md_forkentry().  It
+takes two parameters.  The first, and only important one, is the trapframe stored
+by the sys_fork() function at the time the system call was made.  A local variable in
+md_forkentry() already exists which is of time trapframe.  This means that the trapframe
+data is on the child's stack, which is a requirement for returning to userspace.  The
+copy of the parent's trap frame is then copied into the child's so that the registers
+will be identical.  The final step to the forking process is that the md_forkentry() 
+function will advance the child's program counter so that it will not repeat the system
+call, as well as set the return value of the system call to 0 so that the child can
+differentiate itself from the parent at runtime.  
+
+Pros and Cons:
+The biggest disadvantage of this system is the way process id's are handled.
+Because we store all of the initial process id's in a queue, there is a lot of
+space being consumed by the queue initially.  For instance, if the queue has 1000
+numbers stored in it, it could consume up to 4KB of memory.  This is fairly large
+for just keeping track of unique identifiers.  The advantages though, are speed 
+because it doesn't take much to push or pop from a queue.  Also, ease of 
+implementation because it was just a matter of utilizing the premade queue data
+structure offered by the kernel.  
+
+Problems:
+The only problem I had with fork() was that I was unable to test it thorougly with 
+the existing test binaries due to other syscalls not being implemented.  To the
+best of my knowledge though, this system all functions properly except for the error
+values it is supposed to yeild.  We assumed the fork function would never fail, which
+of course is a bad assumption to make.
+
+_exit():
+Overview:
+The exit system call is very easy to write because there is already a thread
+termination function offered by the kernel to destroy threads.  The most
+difficult part is to make sure process id's are not reclaimed before all 
+interested parties have been informed of their demise.  
+
+Implementation:
+The implementation of this system call is just a matter of calling 
+thread_exit() and taking note of the reason why it is terminating.  This is
+accomplished by storing the process's exit code in the thread's data structure,
+and then invoking the thread_exit() function.  This process does not return anything
+so it is not important to worry about the return value as it is already handled by
+the trap handler.
+
+Pros and Cons:
+This is really the best way to terminate threads as it requires minimal effort
+so that a thread can die quickly and free of time on the processor.  It is easy
+to implement and easy to understand and maintain.
+
+Problems:
+There are no problems with this system call as it cannot fail and was also
+fully implemented.
+
+waitpid():
+Overview:
+The waitpid function is not actually implemented because of time constraints and 
+difficulties with other system calls.  However, the design has been completed.  The
+purpose of waitpid is to express that a process has interest in another process's
+state.  First, when threads are created, we keep track of their parents and children.
+This is accomplished by simply keeping track of a list of pointers to other threads.  We
+also keep track of threads/processes which are of interest.  When a thread is scheduled to
+be terminated it is changed to the zombie state and it's user-level data structures
+are destroyed.  A function comes along periodically and destroys the zombie threads from the
+system.  But before it does, the OS checks to see if any processes were interested in the
+process it is about to destroy.  If they were, it wakes them up and notifies them with the
+rocess exit code.  After all the interested processes have been awakened, it will only then
+destroy the process and reclaim its process id.  Then, after a thread has been awakened, it will
+destroy the pointer in the interested list so that the OS will no longer think that process is
+interested in the soon-to-be destroyed process.  It was a design goal that processes can only
+wait on their children.  So when a process calls waitpid() it will first locate the process it
+wishes to wait on to see if it exists.  If it doesn't, it will throw an error.  If it does, it
+will traverse through parent pointers to see if the calling process is encountered. If the
+calling process is not encountered, we know the calling process isn ot a parent process so it
+cannot wait.  If it does encounter the calling process though, it will put the calling process
+to sleep and update its interested list so that it can be notified when the child process dies.
+
+Implementation:
+Again, this system call was never actually implemented but the data structures it would have used
+would be the parent and child pointers.  The parent pointer is singular, but the child pointers must
+be stored in an array as there can be multiple children.  These all reside in the existin kernel thread
+structure.  And they are updated only on created, destruction, and waitpid() or fork system calls.
+
+Pros and Cons:
+The disadvantages to this system is that they are slow.  Whenever a thread dies, all sleeping processes
+must be analyzed to see if they were interested in the process that is dying.  If they are they must
+be awakened and have their data structures modified.  Also, when a child is created, the parent process
+must be notified so that it can add the child to its list of children.
+
+Problems:
+This system call was not implemented due to time constraints with other system calls.
+
+execv():
+Overview:
+This system call is very similar to the runprogram already in the kernel.  It must load in 
+the program with load_elf, create an address space and user-level stack, then attach it all
+to a thread and set to runnable.  
+
+Implementation:
+No existing infrastructure is required to support this system call besides that which already
+exists in the kernel.  The most important part about this is that the registers in the newly spawned
+thread are set to 0.  This means that instead of calling mips_usermod() to enter into usermode, md_usermode
+must be called to notify the kernel, where and how to execute the program.
+
+Pro's and Con's:
+There isn't too much to be considered trade-off wise with this system call as it is
+fairly straight forward design wise.  The implementation may prove to be a little tricky
+however.
+
+Problems:
+This system call was also unable to be implemented because of time constraints concerning
+other system calls which, namely, fork().
+
