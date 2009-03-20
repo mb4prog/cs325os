@@ -72,6 +72,10 @@ thread_create(const char *name)
 
 	// Initialize the thread's filetable.
 	thread->ft = filetable_create();
+
+#ifdef PRIORITY_SCHEDULER
+	thread->priority = PRIORITY_NORMAL;
+#endif
 	
 	return thread;
 }
